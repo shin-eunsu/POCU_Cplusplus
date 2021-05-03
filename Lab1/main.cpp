@@ -9,7 +9,7 @@ int main()
 	int b = 0;
 	int result = 0;
 
-	cout << "정수 2개 입력: ";
+	cout << "input two numbers : ";
 	cin >> a >> b;
 	result = lab1::Add(a, b);
 	cout << "Result : " << result << endl;
