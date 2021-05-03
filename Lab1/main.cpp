@@ -2,6 +2,7 @@
 #include "Add.h"
 
 using namespace std;
+using namespace lab1;
 
 int main()
 {
@@ -11,7 +12,7 @@ int main()
 
 	cout << "input two numbers : ";
 	cin >> a >> b;
-	result = lab1::Add(a, b);
+	result = Add(a, b);
 	cout << "Result : " << result << endl;
 
 	return 0;
