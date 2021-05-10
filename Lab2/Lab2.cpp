@@ -1,7 +1,7 @@
 #include "Lab2.h"
 
 namespace lab2
-{    
+{
     void PrintIntegers(std::istream& in, std::ostream& out)
     {
         out << setw(12) << "oct" << setw(11) << "dec" << setw(9) << "hex" << endl;
@@ -44,7 +44,6 @@ namespace lab2
     bool IsInteger(const char c)
     {
         int val = static_cast<int>(c);
-        //DEC 0~9 : ASCII 48~57
         if (val >= 48 && val <= 57)
         {
             return true;
@@ -61,7 +60,6 @@ namespace lab2
         bool bDot = false;
         int val = static_cast<int>(c);
 
-        //DEC 0~9 : ASCII 48~57, dot : 46
         if (val >= 48 && val <= 57 || val == 46)
         {
             return true;
