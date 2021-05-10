@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 int main()
 {
 	lab2::PrintIntegers(cin, cout);
