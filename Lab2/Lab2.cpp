@@ -5,7 +5,7 @@ namespace lab2
     void PrintIntegers(std::istream& in, std::ostream& out)
     {
         out << setw(12) << "oct" << setw(11) << "dec" << setw(10) << "hex" << endl;
-        out << setw(13) << setfill('-') << " " << setw(11) << " " << setw(10) << "-" << setfill(' ');
+        out << setw(13) << setfill('-') << " " << setw(11) << " " << setw(9) << "-" << setfill(' ');
                 
         int cnt = 0;
         char str[BUFSIZ];
