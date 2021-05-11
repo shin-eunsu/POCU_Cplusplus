@@ -13,5 +13,7 @@ namespace lab2
 	void PrintMaxFloat(std::istream& in, std::ostream& out);
 
 	bool IsInteger(const char c);
+	bool IsFloat(const char c);
+	float GetMaxVal(float val[], int cnt);
 
 }
