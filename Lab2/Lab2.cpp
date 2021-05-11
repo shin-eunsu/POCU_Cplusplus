@@ -112,10 +112,10 @@ namespace lab2
     {
         float returnVal = val[0];
 
-        for (int i = 0; i < cnt - 1; i++)
+        for (int i = 0; i < cnt ; i++)
         {
-            if (val[i] < val[i + 1])
-                returnVal = val[i + 1];
+            if (returnVal < val[i])
+                returnVal = val[i];
         }
         return returnVal;
     }
