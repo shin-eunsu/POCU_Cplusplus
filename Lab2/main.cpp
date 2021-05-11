@@ -4,6 +4,6 @@
 int main()
 {
 	lab2::PrintIntegers(cin, cout);
-	//lab2::PrintMaxFloat(cin, cout);
+	lab2::PrintMaxFloat(cin, cout);
 	return 0;
 }
