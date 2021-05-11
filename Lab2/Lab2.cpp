@@ -54,6 +54,7 @@ namespace lab2
 		float inputArray[BUFSIZ];
 		bool bCheckPrint = false;
 		char c;
+		char* nullPtr = nullptr;
 
 		while (in.get(c))
 		{
@@ -71,8 +72,7 @@ namespace lab2
 			else if (bCheckPrint)
 			{
 				str[charCnt] = '\0';
-				char* _eof = nullptr;
-				float outVal = strtof(str, &_eof);
+				float outVal = strtof(str, &nullPtr);
 				inputArray[arrayCnt++] = outVal;
 
 				out << setw(5) << " " << setw(15) << internal << showpos << fixed << setprecision(3) << outVal << endl;
@@ -85,8 +85,7 @@ namespace lab2
 		if (charCnt != 0)
 		{
 			str[charCnt] = '\0';
-			char* _eof = nullptr;
-			float outVal = strtof(str, &_eof);
+			float outVal = strtof(str, &nullPtr);
 			inputArray[arrayCnt++] = outVal;
 
 			out << setw(5) << " " << setw(15) << internal << showpos << fixed << setprecision(3) << outVal << endl;
