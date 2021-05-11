@@ -15,5 +15,5 @@ namespace lab2
 	bool IsInteger(const char c);
 	bool IsFloat(const char c);
 	float GetMaxVal(float val[], int cnt);
-
+	int ReSize(char** array);
 }
