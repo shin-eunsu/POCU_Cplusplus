@@ -22,12 +22,7 @@ namespace lab2
 				if (charCnt >= strSize)
 				{
 					strSize = strSize * 2;
-					char* tmpStr = new char[strSize];
-					memcpy_s(tmpStr, strSize, str, strlen(str));
-					delete[] str;
-					str = new char[strSize];
-					memcpy_s(str, strSize, tmpStr, strSize);
-					delete[] tmpStr;
+					str = ReSize(str, strSize);
 				}
 			}
 			else if (bCheckPrint)
@@ -70,18 +65,14 @@ namespace lab2
 				if (charCnt >= strSize)
 				{
 					strSize = strSize * 2;
-					char* tmpStr = new char[strSize];
-					memcpy_s(tmpStr, strSize, str, strlen(str));
-					delete[] str;
-					str = new char[strSize];
-					memcpy_s(str, strSize, tmpStr, strSize);
-					delete[] tmpStr;
+					str = ReSize(str, strSize);
 				}
 			}
 			else if (bCheckPrint)
 			{
 				str[charCnt] = '\0';
-				float outVal = atof(str);
+				char* _eof = nullptr;
+				float outVal = strtof(str, &_eof);
 				inputArray[arrayCnt++] = outVal;
 
 				out << setw(5) << " " << setw(15) << internal << showpos << fixed << setprecision(3) << outVal << endl;
@@ -94,7 +85,8 @@ namespace lab2
 		if (charCnt != 0)
 		{
 			str[charCnt] = '\0';
-			float outVal = atof(str);
+			char* _eof = nullptr;
+			float outVal = strtof(str, &_eof);
 			inputArray[arrayCnt++] = outVal;
 
 			out << setw(5) << " " << setw(15) << internal << showpos << fixed << setprecision(3) << outVal << endl;
@@ -146,16 +138,15 @@ namespace lab2
 		return returnVal;
 	}
 
-	int ReSize(char** array)
+	char* ReSize(char* str, int newSize)
 	{
-		int reSize = strlen(*array) * 2;
-		char* tmpStr = new char[reSize];
-		memcpy_s(tmpStr, reSize, *array, strlen(*array));
-		delete[] *array;
-		*array = new char[reSize];
-		memcpy_s(*array, reSize, tmpStr, reSize);
+		char* tmpStr = new char[newSize];
+		memcpy_s(tmpStr, newSize, str, strlen(str));
+		delete[] str;
+		str = new char[newSize];
+		memcpy_s(str, newSize, tmpStr, newSize);
 		delete[] tmpStr;
 
-		return reSize;
+		return str;
 	}
 }
