@@ -47,6 +47,7 @@ namespace lab2
 			int outValue = atoi(str);
 			out << setw(12) << oct << outValue << setw(11) << dec << outValue << setw(9) << hex << uppercase << outValue << endl;
 		}
+		delete[] str;
 	}
 
 	void PrintMaxFloat(std::istream& in, std::ostream& out)
@@ -100,6 +101,7 @@ namespace lab2
 		}
 
 		out << "max: " << setw(15) << internal << showpos << fixed << setprecision(3) << GetMaxVal(inputArray, arrayCnt) << endl;
+		delete[] str;
 	}
 
 	bool IsInteger(const char c)
