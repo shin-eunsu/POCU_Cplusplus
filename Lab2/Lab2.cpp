@@ -7,6 +7,118 @@ namespace lab2
 		out << setw(12) << "oct" << setw(11) << "dec" << setw(9) << "hex" << endl;
 		out << setw(13) << setfill('-') << " " << setw(11) << " " << setw(8) << "-" << setfill(' ') << endl;
 
+		unsigned long int charCnt = 0;
+		unsigned long int inputArrayCnt = 0;
+		unsigned long int strSize = 512;
+		unsigned long int inputArraySize = 512;
+		char* str = new char[strSize];
+		int* inputArray = new int[inputArraySize];
+		char c;
+
+		while (true)
+		{
+			if (in.get(c))
+			{
+				if (IsInteger(c))
+				{
+					str[charCnt++] = c;
+					checkCharResize(str, strSize, charCnt);
+				}
+				else
+				{
+					str[charCnt] = '\0';
+					if (strlen(str) > 0)
+					{
+						inputArray[inputArrayCnt++] = atoi(str);
+					}
+					charCnt = 0;
+					memset(str, '\0', strSize);
+					checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
+				}
+			}
+
+			if (in.eof())
+			{
+				str[charCnt] = '\0';
+				if (strlen(str) > 0)
+				{
+					inputArray[inputArrayCnt++] = atoi(str);
+				}
+				break;
+			}
+		}
+
+		for (unsigned long int i = 0; i < inputArrayCnt; i++)
+		{
+			out << setw(12) << oct << inputArray[i] << setw(11) << dec << inputArray[i] << setw(9) << hex << uppercase << inputArray[i] << endl;
+		}
+
+		delete[] str;
+		delete[] inputArray;
+	}
+
+	void PrintMaxFloat(std::istream& in, std::ostream& out)
+	{
+		unsigned long int charCnt = 0;
+		unsigned long int inputArrayCnt = 0;
+		unsigned long int strSize = 512;
+		unsigned long int inputArraySize = 512;
+		char* str = new char[strSize];
+		float* inputArray = new float[inputArraySize];
+		char c;
+		
+		while (true)
+		{
+			if (in.get(c))
+			{
+				if (IsFloat(c))
+				{
+					str[charCnt++] = c;
+					checkCharResize(str, strSize, charCnt);
+				}
+				else
+				{
+					str[charCnt] = '\0';
+					if (strlen(str) > 0)
+					{
+						inputArray[inputArrayCnt++] = strtof(str, NULL);
+					}
+					charCnt = 0;
+					memset(str, '\0', strSize);
+					checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
+				}				
+			}
+
+			if (in.eof())
+			{
+				str[charCnt] = '\0';
+				if (strlen(str) > 0)
+				{
+					inputArray[inputArrayCnt++] = strtof(str, NULL);
+				}
+				break;
+			}
+		}
+
+		for (unsigned long int i = 0; i < inputArrayCnt; i++)
+		{
+			out << setw(5) << " " << setw(15) << internal << showpos << fixed << setprecision(3) << inputArray[i] << endl;
+		}
+		if (inputArrayCnt > 0)
+		{
+			out << "max: " << setw(15) << internal << showpos << fixed << setprecision(3) << GetMaxVal(inputArray, inputArrayCnt) << endl;
+		}
+		
+		delete[] str;
+		delete[] inputArray;
+	}
+
+
+	void PrintIntegers1(std::istream& in, std::ostream& out)
+	{
+		out << setw(12) << "oct" << setw(11) << "dec" << setw(9) << "hex" << endl;
+		out << setw(13) << setfill('-') << " " << setw(11) << " " << setw(8) << "-" << setfill(' ') << endl;
+
 		unsigned long int strSize = BUFSIZ;
 		unsigned long int charCnt = 0;
 		char* str = new char[BUFSIZ];
@@ -45,7 +157,7 @@ namespace lab2
 		delete[] str;
 	}
 
-	void PrintMaxFloat(std::istream& in, std::ostream& out)
+	void PrintMaxFloat1(std::istream& in, std::ostream& out)
 	{
 		unsigned long int charCnt = 0;
 		unsigned long int arrayCnt = 0;
@@ -159,12 +271,51 @@ namespace lab2
 	float* ReSize(float* val, int newSize)
 	{
 		float* tmpVal = new float[newSize];
-		memcpy_s(tmpVal, newSize, val, sizeof(val));
+		memcpy_s(tmpVal, newSize, val, newSize / 2);
 		delete[] val;
 		val = new float[newSize];
 		memcpy_s(val, newSize, tmpVal, newSize);
 		delete[] tmpVal;
 
 		return val;
+	}
+
+	int* ReSize(int* val, int newSize)
+	{
+		int* tmpVal = new int[newSize];
+		memcpy_s(tmpVal, newSize, val, newSize / 2);
+		delete[] val;
+		val = new int[newSize];
+		memcpy_s(val, newSize, tmpVal, newSize);
+		delete[] tmpVal;
+
+		return val;
+	}
+
+	void checkCharResize(char* (&str), unsigned long int& strSize, const unsigned long int charCnt)
+	{
+		if (charCnt >= strSize)
+		{
+			strSize = strSize * 2;
+			str = ReSize(str, strSize);
+		}
+	}
+
+	void checkArrayResize(int* (&inputArray), unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
+	{
+		if (inputArrayCnt >= inputArraySize)
+		{
+			inputArraySize *= 2;
+			inputArray = ReSize(inputArray, inputArraySize);
+		}
+	}
+
+	void checkArrayResize(float* (&inputArray), unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
+	{
+		if (inputArrayCnt >= inputArraySize)
+		{
+			inputArraySize *= 2;
+			inputArray = ReSize(inputArray, inputArraySize);
+		}
 	}
 }

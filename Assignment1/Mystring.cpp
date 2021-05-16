@@ -2,6 +2,9 @@
 
 namespace assignment1
 {
+    const int BUF_SIZE = 512;
+    char* str = new char[BUF_SIZE];
+
     MyString::MyString(const char* s)
     {
     }
@@ -12,6 +15,7 @@ namespace assignment1
 
     MyString::~MyString()
     {
+        delete[] str;
     }
 
     unsigned int MyString::GetLength() const
