@@ -11,7 +11,7 @@ int main()
 {
 	lab2::PrintIntegers(cin, cout);
 	lab2::PrintMaxFloat(cin, cout);
-	_CrtDumpMemoryLeaks();
+	//_CrtDumpMemoryLeaks();
 
 	return 0;
 }

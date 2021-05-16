@@ -16,4 +16,5 @@ namespace lab2
 	bool IsFloat(const char c);
 	float GetMaxVal(float val[], int cnt);
 	char* ReSize(char* str, int newSize);
+	float* ReSize(float* val, int newSize);
 }

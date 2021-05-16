@@ -48,13 +48,13 @@ namespace lab2
 	void PrintMaxFloat(std::istream& in, std::ostream& out)
 	{
 		int charCnt = 0;
-		int arrayCnt = 0;
+		unsigned long int arrayCnt = 0;
 		int strSize = BUFSIZ;
+		int arrSize = BUFSIZ;
 		char* str = new char[BUFSIZ];
-		float inputArray[BUFSIZ];
+		float* inputArray = new float[BUFSIZ];
 		bool bCheckPrint = false;
 		char c;
-		char* nullPtr = nullptr;
 
 		while (in.get(c))
 		{
@@ -72,20 +72,26 @@ namespace lab2
 			else if (bCheckPrint)
 			{
 				str[charCnt] = '\0';
-				float outVal = strtof(str, &nullPtr);
+				float outVal = strtof(str, NULL);
 				inputArray[arrayCnt++] = outVal;
+
+				if (arrayCnt >= arrSize)
+				{
+					arrSize = arrSize * 2;
+					inputArray = ReSize(inputArray, arrSize);
+				}
 
 				out << setw(5) << " " << setw(15) << internal << showpos << fixed << setprecision(3) << outVal << endl;
 
 				charCnt = 0;
-				memset(str, '\0', BUFSIZ);
+				memset(str, '\0', strSize);
 				bCheckPrint = false;
 			}
 		}
 		if (charCnt != 0)
 		{
 			str[charCnt] = '\0';
-			float outVal = strtof(str, &nullPtr);
+			float outVal = strtof(str, NULL);
 			inputArray[arrayCnt++] = outVal;
 
 			out << setw(5) << " " << setw(15) << internal << showpos << fixed << setprecision(3) << outVal << endl;
@@ -93,6 +99,7 @@ namespace lab2
 
 		out << "max: " << setw(15) << internal << showpos << fixed << setprecision(3) << GetMaxVal(inputArray, arrayCnt) << endl;
 		delete[] str;
+		delete[] inputArray;
 	}
 
 	bool IsInteger(const char c)
@@ -147,5 +154,17 @@ namespace lab2
 		delete[] tmpStr;
 
 		return str;
+	}
+
+	float* ReSize(float* val, int newSize)
+	{
+		float* tmpVal = new float[newSize];
+		memcpy_s(tmpVal, newSize, val, sizeof(val));
+		delete[] val;
+		val = new float[newSize];
+		memcpy_s(val, newSize, tmpVal, newSize);
+		delete[] tmpVal;
+
+		return val;
 	}
 }
