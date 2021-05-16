@@ -2,95 +2,166 @@
 
 namespace assignment1
 {
-    const int BUF_SIZE = 512;
-    char* str = new char[BUF_SIZE];
+	MyString::MyString(const char* s)
+		:mSize(MyStrlen(s) + 1)
+	{
+		mString = new char[mSize];
+		CharCpy(mString, s, mSize);
+	}
 
-    MyString::MyString(const char* s)
-    {
-    }
+	MyString::MyString(const MyString& other)
+		: mSize(other.mSize)
+	{
+		mString = new char[mSize];
+		CharCpy(mString, other.mString, mSize);
+	}
 
-    MyString::MyString(const MyString& other)
-    {
-    }
+	MyString::~MyString()
+	{
+		delete[] mString;
+	}
 
-    MyString::~MyString()
-    {
-        delete[] str;
-    }
+	unsigned int MyString::GetLength() const
+	{
+		int strLen = 0;
 
-    unsigned int MyString::GetLength() const
-    {
-        return 0;
-    }
+		while (mString[strLen] != '\0')
+		{
+			strLen++;
+		}
+		return strLen;
+	}
 
-    const char* MyString::GetCString() const
-    {
-        return 0;
-    }
+	const char* MyString::GetCString() const
+	{
+		return mString;
+	}
 
-    void MyString::Append(const char* s)
-    {
-    }
+	void MyString::Append(const char* s)
+	{
+		int sSize = MyStrlen(s);
+		char* appendStr = new char[mSize + sSize];
 
-    MyString MyString::operator+(const MyString& other) const
-    {
-        return MyString("temporary");
-    }
+		size_t cnt;
+		for (cnt = 0; cnt < mSize - 1; cnt++)
+		{
+			appendStr[cnt] = mString[cnt];
+		}
+		for (size_t sCnt = 0; sCnt < sSize; sCnt++)
+		{
+			appendStr[cnt++] = s[sCnt];
+		}
+		appendStr[cnt] = '\0';
 
-    int MyString::IndexOf(const char* s)
-    {
-        return 0;
-    }
+		delete[] mString;
+		mString = new char[mSize + sSize];
 
-    int MyString::LastIndexOf(const char* s)
-    {
-        return 0;
-    }
+		CharCpy(mString, appendStr, mSize + sSize);
 
-    void MyString::Interleave(const char* s)
-    {
-    }
+		delete[] appendStr;
+	}
 
-    bool MyString::RemoveAt(unsigned int i)
-    {
-        return false;
-    }
+	MyString MyString::operator+(const MyString& other) const
+	{
+		MyString cat(mString);
+		cat.Append(other.mString);
 
-    void MyString::PadLeft(unsigned int totalLength)
-    {
-    }
+		return MyString(cat.mString);
+	}
 
-    void MyString::PadLeft(unsigned int totalLength, const char c)
-    {
-    }
+	int MyString::IndexOf(const char* s)
+	{
+		int returnVal = -1;
+		for (int i = 0; i < MyStrlen(mString); i++)
+		{
+			if (mString[i] == s[0])
+			{
+				returnVal = i;
+				break;
+			}
+		}
+		return returnVal;
+	}
 
-    void MyString::PadRight(unsigned int totalLength)
-    {
-    }
+	int MyString::LastIndexOf(const char* s)
+	{
+		int returnVal = -1;
+		for (int i = MyStrlen(mString); i > 0; i--)
+		{
+			if (mString[i] == s[0])
+			{
+				returnVal = i;
+				break;
+			}
+		}
+		return returnVal;
+	}
 
-    void MyString::PadRight(unsigned int totalLength, const char c)
-    {
-    }
+	void MyString::Interleave(const char* s)
+	{
+	}
 
-    void MyString::Reverse()
-    {
-    }
+	bool MyString::RemoveAt(unsigned int i)
+	{
+		return false;
+	}
 
-    bool MyString::operator==(const MyString& rhs) const
-    {
-        return false;
-    }
+	void MyString::PadLeft(unsigned int totalLength)
+	{
+	}
 
-    MyString& MyString::operator=(const MyString& rhs)
-    {
-        return *this;
-    }
+	void MyString::PadLeft(unsigned int totalLength, const char c)
+	{
+	}
 
-    void MyString::ToLower()
-    {
-    }
+	void MyString::PadRight(unsigned int totalLength)
+	{
+	}
 
-    void MyString::ToUpper()
-    {
-    }
+	void MyString::PadRight(unsigned int totalLength, const char c)
+	{
+	}
+
+	void MyString::Reverse()
+	{
+	}
+
+	bool MyString::operator==(const MyString& rhs) const
+	{
+		return false;
+	}
+
+	MyString& MyString::operator=(const MyString& rhs)
+	{
+		return *this;
+	}
+
+	void MyString::ToLower()
+	{
+	}
+
+	void MyString::ToUpper()
+	{
+	}
+
+
+	int MyString::MyStrlen(const char* str)
+	{
+		int strLen = 0;
+
+		while (str[strLen] != '\0')
+		{
+			strLen++;
+		}
+		return strLen;
+	}
+
+	void MyString::CharCpy(char* dst, const char* src, size_t srcSize)
+	{
+		size_t cnt;
+		for (cnt = 0; cnt < srcSize; cnt++)
+		{
+			dst[cnt] = src[cnt];
+		}
+	}
 }
