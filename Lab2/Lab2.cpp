@@ -66,7 +66,7 @@ namespace lab2
 		char* str = new char[strSize];
 		float* inputArray = new float[inputArraySize];
 		char c;
-		
+
 		while (true)
 		{
 			if (in.get(c))
@@ -86,7 +86,7 @@ namespace lab2
 					charCnt = 0;
 					memset(str, '\0', strSize);
 					checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
-				}				
+				}
 			}
 
 			if (in.eof())
@@ -108,7 +108,7 @@ namespace lab2
 		{
 			out << "max: " << setw(15) << internal << showpos << fixed << setprecision(3) << GetMaxVal(inputArray, inputArrayCnt) << endl;
 		}
-		
+
 		delete[] str;
 		delete[] inputArray;
 	}
