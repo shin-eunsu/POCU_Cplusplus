@@ -7,8 +7,8 @@ namespace lab2
 		out << setw(12) << "oct" << setw(11) << "dec" << setw(9) << "hex" << endl;
 		out << setw(13) << setfill('-') << " " << setw(11) << " " << setw(8) << "-" << setfill(' ') << endl;
 
-		int strSize = BUFSIZ;
-		int charCnt = 0;
+		unsigned long int strSize = BUFSIZ;
+		unsigned long int charCnt = 0;
 		char* str = new char[BUFSIZ];
 		bool bCheckPrint = false;
 		char c;
@@ -47,10 +47,10 @@ namespace lab2
 
 	void PrintMaxFloat(std::istream& in, std::ostream& out)
 	{
-		int charCnt = 0;
+		unsigned long int charCnt = 0;
 		unsigned long int arrayCnt = 0;
-		int strSize = BUFSIZ;
-		int arrSize = BUFSIZ;
+		unsigned long int strSize = BUFSIZ;
+		unsigned long int arrSize = BUFSIZ;
 		char* str = new char[BUFSIZ];
 		float* inputArray = new float[BUFSIZ];
 		bool bCheckPrint = false;
