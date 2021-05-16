@@ -30,10 +30,10 @@ namespace lab2
 					if (strlen(str) > 0)
 					{
 						inputArray[inputArrayCnt++] = atoi(str);
+						checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
 					}
 					charCnt = 0;
 					memset(str, '\0', strSize);
-					checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
 				}
 			}
 
@@ -82,10 +82,11 @@ namespace lab2
 					if (strlen(str) > 0)
 					{
 						inputArray[inputArrayCnt++] = strtof(str, NULL);
+						checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
 					}
+
 					charCnt = 0;
 					memset(str, '\0', strSize);
-					checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
 				}
 			}
 
@@ -259,7 +260,7 @@ namespace lab2
 	char* ReSize(char* str, int newSize)
 	{
 		char* tmpStr = new char[newSize];
-		memcpy_s(tmpStr, newSize, str, strlen(str));
+		memcpy_s(tmpStr, newSize, str, newSize / 2);
 		delete[] str;
 		str = new char[newSize];
 		memcpy_s(str, newSize, tmpStr, newSize);
@@ -292,7 +293,7 @@ namespace lab2
 		return val;
 	}
 
-	void checkCharResize(char*(& str), unsigned long int& strSize, const unsigned long int charCnt)
+	void checkCharResize(char*& str, unsigned long int& strSize, const unsigned long int charCnt)
 	{
 		if (charCnt >= strSize)
 		{
@@ -301,7 +302,7 @@ namespace lab2
 		}
 	}
 
-	void checkArrayResize(int*(& inputArray), unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
+	void checkArrayResize(int*& inputArray, unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
 	{
 		if (inputArrayCnt >= inputArraySize)
 		{
@@ -310,7 +311,7 @@ namespace lab2
 		}
 	}
 
-	void checkArrayResize(float*(& inputArray), unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
+	void checkArrayResize(float*& inputArray, unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
 	{
 		if (inputArrayCnt >= inputArraySize)
 		{
