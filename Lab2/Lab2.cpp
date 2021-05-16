@@ -292,7 +292,7 @@ namespace lab2
 		return val;
 	}
 
-	void checkCharResize(char* (&str), unsigned long int& strSize, const unsigned long int charCnt)
+	void checkCharResize(char*(& str), unsigned long int& strSize, const unsigned long int charCnt)
 	{
 		if (charCnt >= strSize)
 		{
@@ -301,7 +301,7 @@ namespace lab2
 		}
 	}
 
-	void checkArrayResize(int* (&inputArray), unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
+	void checkArrayResize(int*(& inputArray), unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
 	{
 		if (inputArrayCnt >= inputArraySize)
 		{
@@ -310,7 +310,7 @@ namespace lab2
 		}
 	}
 
-	void checkArrayResize(float* (&inputArray), unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
+	void checkArrayResize(float*(& inputArray), unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
 	{
 		if (inputArrayCnt >= inputArraySize)
 		{
