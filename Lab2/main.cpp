@@ -9,7 +9,7 @@
 
 int main()
 {
-	//lab2::PrintIntegers(cin, cout);
+	lab2::PrintIntegers(cin, cout);
 	lab2::PrintMaxFloat(cin, cout);
 	//_CrtDumpMemoryLeaks();
 
