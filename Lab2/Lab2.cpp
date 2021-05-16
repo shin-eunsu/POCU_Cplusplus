@@ -271,12 +271,14 @@ namespace lab2
 
 	char* ReSize(char* str, int newSize)
 	{
-		int srcSize = sizeof(str) * (newSize / 2);
+		int newMemSize = sizeof(str) * (newSize);
+		int srcMemSize = sizeof(str) * (newSize / 2);
+
 		char* tmpStr = new char[newSize];
-		memcpy_s(tmpStr, srcSize * 2, str, srcSize);
+		memcpy_s(tmpStr, newMemSize, str, srcMemSize);
 		delete[] str;
 		str = new char[newSize];
-		memcpy_s(tmpStr, srcSize * 2, str, srcSize);
+		memcpy_s(tmpStr, newMemSize, str, srcMemSize);
 		delete[] tmpStr;
 
 		return str;
@@ -284,12 +286,14 @@ namespace lab2
 
 	float* ReSize(float* val, int newSize)
 	{
-		int srcSize = sizeof(val) * (newSize / 2);
+		int newMemSize = sizeof(val) * (newSize);
+		int srcMemSize = sizeof(val) * (newSize / 2);
+
 		float* tmpVal = new float[newSize];
-		memcpy_s(tmpVal, srcSize * 2, val, srcSize);
+		memcpy_s(tmpVal, newMemSize, val, srcMemSize);
 		delete[] val;
 		val = new float[newSize];
-		memcpy_s(val, srcSize * 2, tmpVal, srcSize);
+		memcpy_s(val, newMemSize, tmpVal, srcMemSize);
 		delete[] tmpVal;
 
 		return val;
@@ -297,12 +301,14 @@ namespace lab2
 
 	int* ReSize(int* val, int newSize)
 	{
-		int srcSize = sizeof(val) * (newSize / 2);
+		int newMemSize = sizeof(val) * (newSize);
+		int srcMemSize = sizeof(val) * (newSize / 2);
+
 		int* tmpVal = new int[newSize];
-		memcpy_s(tmpVal, srcSize * 2, val, srcSize);
+		memcpy_s(tmpVal, newMemSize, val, srcMemSize);
 		delete[] val;
 		val = new int[newSize];
-		memcpy_s(val, srcSize * 2, tmpVal, srcSize);
+		memcpy_s(val, newMemSize, tmpVal, srcMemSize);
 		delete[] tmpVal;
 
 		return val;
