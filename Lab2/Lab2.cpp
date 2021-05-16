@@ -271,11 +271,12 @@ namespace lab2
 
 	char* ReSize(char* str, int newSize)
 	{
+		int srcSize = sizeof(str) * (newSize / 2);
 		char* tmpStr = new char[newSize];
-		memcpy_s(tmpStr, newSize, str, newSize / 2);
+		memcpy_s(tmpStr, srcSize * 2, str, srcSize);
 		delete[] str;
 		str = new char[newSize];
-		memcpy_s(str, newSize, tmpStr, newSize);
+		memcpy_s(tmpStr, srcSize * 2, str, srcSize);
 		delete[] tmpStr;
 
 		return str;
