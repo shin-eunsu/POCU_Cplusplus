@@ -2,6 +2,11 @@
 
 namespace lab2
 {
+	/// <summary>
+	/// TEST 2
+	/// </summary>
+	/// <param name="in"></param>
+	/// <param name="out"></param>
 	void PrintIntegers(std::istream& in, std::ostream& out)
 	{
 		out << setw(12) << "oct" << setw(11) << "dec" << setw(9) << "hex" << endl;
@@ -27,10 +32,11 @@ namespace lab2
 				else
 				{
 					str[charCnt] = '\0';
+
 					if (strlen(str) > 0)
 					{
 						inputArray[inputArrayCnt++] = atoi(str);
-						checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
+						inputArray = checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
 					}
 					charCnt = 0;
 					memset(str, '\0', strSize);
@@ -82,7 +88,7 @@ namespace lab2
 					if (strlen(str) > 0)
 					{
 						inputArray[inputArrayCnt++] = strtof(str, NULL);
-						checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
+						inputArray = checkArrayResize(inputArray, inputArraySize, inputArrayCnt);
 					}
 
 					charCnt = 0;
@@ -115,6 +121,11 @@ namespace lab2
 	}
 
 
+	/// <summary>
+	/// TEST 1
+	/// </summary>
+	/// <param name="in"></param>
+	/// <param name="out"></param>
 	void PrintIntegers1(std::istream& in, std::ostream& out)
 	{
 		out << setw(12) << "oct" << setw(11) << "dec" << setw(9) << "hex" << endl;
@@ -215,6 +226,7 @@ namespace lab2
 		delete[] inputArray;
 	}
 
+
 	bool IsInteger(const char c)
 	{
 		int val = static_cast<int>(c);
@@ -271,11 +283,12 @@ namespace lab2
 
 	float* ReSize(float* val, int newSize)
 	{
+		int srcSize = sizeof(val) * (newSize / 2);
 		float* tmpVal = new float[newSize];
-		memcpy_s(tmpVal, newSize, val, newSize / 2);
+		memcpy_s(tmpVal, srcSize * 2, val, srcSize);
 		delete[] val;
 		val = new float[newSize];
-		memcpy_s(val, newSize, tmpVal, newSize);
+		memcpy_s(val, srcSize * 2, tmpVal, srcSize);
 		delete[] tmpVal;
 
 		return val;
@@ -283,40 +296,44 @@ namespace lab2
 
 	int* ReSize(int* val, int newSize)
 	{
+		int srcSize = sizeof(val) * (newSize / 2);
 		int* tmpVal = new int[newSize];
-		memcpy_s(tmpVal, newSize, val, newSize / 2);
+		memcpy_s(tmpVal, srcSize * 2, val, srcSize);
 		delete[] val;
 		val = new int[newSize];
-		memcpy_s(val, newSize, tmpVal, newSize);
+		memcpy_s(val, srcSize * 2, tmpVal, srcSize);
 		delete[] tmpVal;
 
 		return val;
 	}
 
-	void checkCharResize(char*& str, unsigned long int& strSize, const unsigned long int charCnt)
+	char* checkCharResize(char* str, unsigned long int& strSize, const unsigned long int charCnt)
 	{
 		if (charCnt >= strSize)
 		{
 			strSize = strSize * 2;
 			str = ReSize(str, strSize);
 		}
+		return str;
 	}
 
-	void checkArrayResize(int*& inputArray, unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
+	int* checkArrayResize(int* inputArray, unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
 	{
 		if (inputArrayCnt >= inputArraySize)
 		{
 			inputArraySize *= 2;
 			inputArray = ReSize(inputArray, inputArraySize);
 		}
+		return inputArray;
 	}
 
-	void checkArrayResize(float*& inputArray, unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
+	float* checkArrayResize(float* inputArray, unsigned long int& inputArraySize, const unsigned long int inputArrayCnt)
 	{
 		if (inputArrayCnt >= inputArraySize)
 		{
 			inputArraySize *= 2;
 			inputArray = ReSize(inputArray, inputArraySize);
 		}
+		return inputArray;
 	}
 }
