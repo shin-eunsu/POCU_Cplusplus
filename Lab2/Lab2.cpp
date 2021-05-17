@@ -2,12 +2,72 @@
 
 namespace lab2
 {
+	void PrintIntegers(std::istream& in, std::ostream& out)
+	{
+		int num;
+		string trash;
+
+		out << setw(12) << "oct" << setw(11) << "dec" << setw(9) << "hex" << endl;
+		out << setw(13) << setfill('-') << " " << setw(11) << " " << setw(8) << "-" << setfill(' ') << endl;
+
+		while (!in.eof())
+		{
+			in >> num;
+
+			if (in.fail())
+			{
+				in.clear();
+				in >> trash;
+			}
+			else
+			{
+				out << setw(12) << oct << num << setw(11) << dec << num << setw(9) << hex << uppercase << num << endl;
+			}
+		}
+	}
+
+	void PrintMaxFloat(std::istream& in, std::ostream& out)
+	{
+		float num;
+		float maxNum;
+		string trash;
+		int cnt = 0;
+
+		while (!in.eof())
+		{
+			in >> num;
+
+			if (in.fail())
+			{
+				in.clear();
+				in >> trash;
+			}
+			else
+			{
+				if (cnt == 0)
+				{
+					maxNum = num;
+				}
+				else
+				{
+					if (num > maxNum)
+					{
+						maxNum = num;
+					}
+				}
+				out << setw(5) << " " << setw(15) << internal << showpos << fixed << setprecision(3) << num << endl;
+			}
+		}
+		out << "max: " << setw(15) << internal << showpos << fixed << setprecision(3) << maxNum << endl;
+	}
+
+
 	/// <summary>
 	/// TEST 2
 	/// </summary>
 	/// <param name="in"></param>
 	/// <param name="out"></param>
-	void PrintIntegers(std::istream& in, std::ostream& out)
+	void PrintIntegers2(std::istream& in, std::ostream& out)
 	{
 		out << setw(12) << "oct" << setw(11) << "dec" << setw(9) << "hex" << endl;
 		out << setw(13) << setfill('-') << " " << setw(11) << " " << setw(8) << "-" << setfill(' ') << endl;
@@ -63,7 +123,7 @@ namespace lab2
 		delete[] inputArray;
 	}
 
-	void PrintMaxFloat(std::istream& in, std::ostream& out)
+	void PrintMaxFloat2(std::istream& in, std::ostream& out)
 	{
 		unsigned long int charCnt = 0;
 		unsigned long int inputArrayCnt = 0;
