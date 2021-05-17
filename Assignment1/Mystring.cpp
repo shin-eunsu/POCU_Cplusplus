@@ -39,7 +39,7 @@ namespace assignment1
 
 	void MyString::Append(const char* s)
 	{
-		int sSize = MyStrlen(s);
+		size_t sSize = MyStrlen(s);
 		char* appendStr = new char[mSize + sSize];
 
 		size_t cnt;
@@ -99,11 +99,68 @@ namespace assignment1
 
 	void MyString::Interleave(const char* s)
 	{
+		int mStringSize = MyStrlen(mString);
+		int sSize = MyStrlen(s);
+
+		int minSize = sSize;
+		int maxSize = mStringSize;
+		if (mStringSize < sSize)
+		{
+			minSize = mStringSize;
+			maxSize = sSize;
+		}
+		char* str = new char[minSize + maxSize + 1];
+
+		for (int i = 0; i < minSize; i++)
+		{
+			str[i * 2] = mString[i];
+			str[(i * 2) + 1] = s[i];
+		}
+
+		int cnt = minSize;
+		for (int i = minSize * 2; i < minSize + maxSize; i++)
+		{
+			if (mStringSize > sSize)
+			{
+				str[i] = mString[cnt++];
+			}
+			else
+			{
+				str[i] = s[cnt++];
+			}
+		}
+		str[minSize + maxSize] = '\0';
+
+		delete[] mString;
+		mString = new char[minSize + maxSize + 1];
+		CharCpy(mString, str, minSize + maxSize + 1);
+		delete[] str;
 	}
 
 	bool MyString::RemoveAt(unsigned int i)
 	{
-		return false;
+		unsigned int mStringSize = MyStrlen(mString);
+		if (mStringSize > i)
+		{
+			char* str = new char[mStringSize];
+			CharCpy(str, mString, i);
+			for (int cnt = i; cnt < mStringSize - 1; cnt++)
+			{
+				str[cnt] = mString[cnt + 1];
+			}
+			str[mStringSize - 1] = '\0';
+			
+			delete[] mString;
+			mString = new char[mStringSize];
+			CharCpy(mString, str, mStringSize);
+
+			delete[] str;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	void MyString::PadLeft(unsigned int totalLength)
@@ -158,8 +215,7 @@ namespace assignment1
 
 	void MyString::CharCpy(char* dst, const char* src, size_t srcSize)
 	{
-		size_t cnt;
-		for (cnt = 0; cnt < srcSize; cnt++)
+		for (size_t cnt = 0; cnt < srcSize; cnt++)
 		{
 			dst[cnt] = src[cnt];
 		}
