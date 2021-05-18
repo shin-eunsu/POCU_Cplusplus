@@ -26,12 +26,14 @@ namespace assignment1
 		MyString& operator=(const MyString& rhs);
 		void ToLower();
 		void ToUpper();
+		
 
 	private:
 		char* mString;
 		size_t mSize;
 		int myStrlen(const char* str);
 		void charCpy(char* dst, const char* src, size_t srcSize);
-
+		char* subString(const char* str, int start, int number);
+		bool strCmp(const char* str1, const char* str2);
 	};
 }

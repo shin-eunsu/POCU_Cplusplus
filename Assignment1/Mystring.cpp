@@ -71,10 +71,13 @@ namespace assignment1
 
 	int MyString::IndexOf(const char* s)
 	{
+		int sSize = myStrlen(s);
+
 		int returnVal = -1;
 		for (unsigned int i = 0; i < GetLength(); i++)
 		{
-			if (mString[i] == s[0])
+			const char* subStr = subString(&mString[i], 0, sSize);
+			if (strCmp(subStr, s))
 			{
 				returnVal = i;
 				break;
@@ -85,13 +88,20 @@ namespace assignment1
 
 	int MyString::LastIndexOf(const char* s)
 	{
+		int mStringSize = myStrlen(mString);
+		int sSize = myStrlen(s);
+
 		int returnVal = -1;
-		for (unsigned int i = GetLength(); i > 0; i--)
+		for (int i = mStringSize; i >= 0; i--)
 		{
-			if (mString[i] == s[0])
+			if (mStringSize - sSize >= i)
 			{
-				returnVal = i;
-				break;
+				const char* subStr = subString(&mString[i], 0, sSize);
+				if (strCmp(subStr, s))
+				{
+					returnVal = i;
+					break;
+				}
 			}
 		}
 		return returnVal;
@@ -346,4 +356,40 @@ namespace assignment1
 			dst[cnt] = src[cnt];
 		}
 	}
+
+	char* MyString::subString(const char* src, int start, int number)
+	{
+		int sSize = number - start + 1;
+		char* str = new char[number - start + 2];
+
+		for (int i = 0; i < number; i++)
+		{
+			str[i] = src[start + i];
+		}
+		str[number] = '\0';
+		return str;
+	}
+
+	bool MyString::strCmp(const char* str1, const char* str2)
+	{
+		int str1Size = myStrlen(str1);
+		int str2Size = myStrlen(str2);
+		if (str1Size == str2Size)
+		{
+			for (int i = 0; i < str1Size; i++)
+			{
+				if (str1[i] != str2[i])
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	
 }
