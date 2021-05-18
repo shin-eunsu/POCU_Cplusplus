@@ -26,6 +26,4 @@ int main()
 	//s.Reverse();
 	s.ToLower();
 	s2.ToUpper();
-
-	system("pause");
 }

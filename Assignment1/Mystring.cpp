@@ -3,17 +3,19 @@
 namespace assignment1
 {
 	MyString::MyString(const char* s)
-		:mSize(MyStrlen(s) + 1)
+		: mSize(myStrlen(s) + 1)
 	{
 		mString = new char[mSize];
-		CharCpy(mString, s, mSize);
+		charCpy(mString, s, mSize);
+		mString[mSize - 1] = '\0';
 	}
 
 	MyString::MyString(const MyString& other)
 		: mSize(other.mSize)
 	{
 		mString = new char[mSize];
-		CharCpy(mString, other.mString, mSize);
+		charCpy(mString, other.mString, mSize);
+		mString[mSize - 1] = '\0';
 	}
 
 	MyString::~MyString()
@@ -39,7 +41,7 @@ namespace assignment1
 
 	void MyString::Append(const char* s)
 	{
-		size_t sSize = MyStrlen(s);
+		size_t sSize = myStrlen(s);
 		char* appendStr = new char[mSize + sSize];
 
 		size_t cnt;
@@ -56,7 +58,7 @@ namespace assignment1
 		delete[] mString;
 		mString = new char[mSize + sSize];
 
-		CharCpy(mString, appendStr, mSize + sSize);
+		charCpy(mString, appendStr, mSize + sSize);
 
 		delete[] appendStr;
 	}
@@ -72,7 +74,7 @@ namespace assignment1
 	int MyString::IndexOf(const char* s)
 	{
 		int returnVal = -1;
-		for (int i = 0; i < GetLength(); i++)
+		for (unsigned int i = 0; i < GetLength(); i++)
 		{
 			if (mString[i] == s[0])
 			{
@@ -86,7 +88,7 @@ namespace assignment1
 	int MyString::LastIndexOf(const char* s)
 	{
 		int returnVal = -1;
-		for (int i = MyStrlen(mString); i > 0; i--)
+		for (unsigned int i = GetLength(); i > 0; i--)
 		{
 			if (mString[i] == s[0])
 			{
@@ -100,7 +102,7 @@ namespace assignment1
 	void MyString::Interleave(const char* s)
 	{
 		int mStringSize = GetLength();
-		int sSize = MyStrlen(s);
+		int sSize = myStrlen(s);
 
 		int minSize = sSize;
 		int maxSize = mStringSize;
@@ -133,7 +135,7 @@ namespace assignment1
 
 		delete[] mString;
 		mString = new char[minSize + maxSize + 1];
-		CharCpy(mString, str, minSize + maxSize + 1);
+		charCpy(mString, str, minSize + maxSize + 1);
 		delete[] str;
 	}
 
@@ -143,8 +145,8 @@ namespace assignment1
 		if (mStringSize > i)
 		{
 			char* str = new char[mStringSize];
-			CharCpy(str, mString, i);
-			for (int cnt = i; cnt < mStringSize - 1; cnt++)
+			charCpy(str, mString, i);
+			for (unsigned int cnt = i; cnt < mStringSize - 1; cnt++)
 			{
 				str[cnt] = mString[cnt + 1];
 			}
@@ -152,7 +154,7 @@ namespace assignment1
 
 			delete[] mString;
 			mString = new char[mStringSize];
-			CharCpy(mString, str, mStringSize);
+			charCpy(mString, str, mStringSize);
 
 			delete[] str;
 			return true;
@@ -165,7 +167,7 @@ namespace assignment1
 
 	void MyString::PadLeft(unsigned int totalLength)
 	{
-		int mStringSize = GetLength();
+		unsigned int mStringSize = GetLength();
 		char addChar = ' ';
 
 		if (totalLength > mStringSize)
@@ -185,14 +187,14 @@ namespace assignment1
 
 			delete[] mString;
 			mString = new char[totalLength + 1];
-			CharCpy(mString, str, totalLength + 1);
+			charCpy(mString, str, totalLength + 1);
 			delete[] str;
 		}
 	}
 
 	void MyString::PadLeft(unsigned int totalLength, const char c)
 	{
-		int mStringSize = GetLength();
+		unsigned int mStringSize = GetLength();
 		char addChar = c;
 
 		if (totalLength > mStringSize)
@@ -212,14 +214,14 @@ namespace assignment1
 
 			delete[] mString;
 			mString = new char[totalLength + 1];
-			CharCpy(mString, str, totalLength + 1);
+			charCpy(mString, str, totalLength + 1);
 			delete[] str;
 		}
 	}
 
 	void MyString::PadRight(unsigned int totalLength)
 	{
-		int mStringSize = GetLength();
+		unsigned int mStringSize = GetLength();
 		char addChar = ' ';
 
 		if (totalLength > mStringSize)
@@ -227,7 +229,7 @@ namespace assignment1
 			char* str = new char[totalLength + 1];
 			unsigned int addCnt = totalLength - mStringSize;
 
-			CharCpy(str, mString, mStringSize);
+			charCpy(str, mString, mStringSize);
 			for (unsigned int i = mStringSize; i < totalLength; i++)
 			{
 				str[i] = addChar;
@@ -236,14 +238,14 @@ namespace assignment1
 
 			delete[] mString;
 			mString = new char[totalLength + 1];
-			CharCpy(mString, str, totalLength + 1);
+			charCpy(mString, str, totalLength + 1);
 			delete[] str;
 		}
 	}
 
 	void MyString::PadRight(unsigned int totalLength, const char c)
 	{
-		int mStringSize = GetLength();
+		unsigned int mStringSize = GetLength();
 		char addChar = c;
 
 		if (totalLength > mStringSize)
@@ -251,7 +253,7 @@ namespace assignment1
 			char* str = new char[totalLength + 1];
 			unsigned int addCnt = totalLength - mStringSize;
 
-			CharCpy(str, mString, mStringSize);
+			charCpy(str, mString, mStringSize);
 			for (unsigned int i = mStringSize; i < totalLength; i++)
 			{
 				str[i] = addChar;
@@ -260,17 +262,17 @@ namespace assignment1
 
 			delete[] mString;
 			mString = new char[totalLength + 1];
-			CharCpy(mString, str, totalLength + 1);
+			charCpy(mString, str, totalLength + 1);
 			delete[] str;
 		}
 	}
 
 	void MyString::Reverse()
 	{
-		int mStringSize = GetLength();
-		char tmp = NULL;
+		unsigned int mStringSize = GetLength();
+		char tmp;
 
-		for (int i = 0; i < mStringSize / 2; i++)
+		for (unsigned int i = 0; i < mStringSize / 2; i++)
 		{
 			tmp = mString[i];
 			mString[i] = mString[mStringSize - i - 1];
@@ -304,9 +306,9 @@ namespace assignment1
 	// ( - ) : 32		0x20
 	void MyString::ToLower()
 	{
-		int mStringSize = GetLength();
+		unsigned int mStringSize = GetLength();
 
-		for (int i = 0; i < mStringSize; i++)
+		for (unsigned int i = 0; i < mStringSize; i++)
 		{
 			if ((mString[i] >= 0x41) && (mString[i] <= 0x5A)) //대문자
 			{
@@ -317,9 +319,9 @@ namespace assignment1
 
 	void MyString::ToUpper()
 	{
-		int mStringSize = GetLength();
+		unsigned int mStringSize = GetLength();
 
-		for (int i = 0; i < mStringSize; i++)
+		for (unsigned int i = 0; i < mStringSize; i++)
 		{
 			if ((mString[i] >= 0x61) && (mString[i] <= 0x7A)) //소문자
 			{
@@ -328,7 +330,7 @@ namespace assignment1
 		}
 	}
 
-	int MyString::MyStrlen(const char* str)
+	int MyString::myStrlen(const char* str)
 	{
 		int strLen = 0;
 
@@ -339,7 +341,7 @@ namespace assignment1
 		return strLen;
 	}
 
-	void MyString::CharCpy(char* dst, const char* src, size_t srcSize)
+	void MyString::charCpy(char* dst, const char* src, size_t srcSize)
 	{
 		for (size_t cnt = 0; cnt < srcSize; cnt++)
 		{

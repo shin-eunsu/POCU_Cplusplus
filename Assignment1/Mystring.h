@@ -30,8 +30,8 @@ namespace assignment1
 	private:
 		char* mString;
 		size_t mSize;
-		int MyStrlen(const char* str);
-		void CharCpy(char* dst, const char* src, size_t srcSize);
+		int myStrlen(const char* str);
+		void charCpy(char* dst, const char* src, size_t srcSize);
 
 	};
 }
