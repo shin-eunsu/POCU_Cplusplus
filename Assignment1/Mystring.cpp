@@ -79,11 +79,16 @@ namespace assignment1
 		int sSize = myStrlen(s);
 		int cnt = 0;
 
-		if (s == nullptr)
+		if (s == nullptr || sSize > mStringSize)
 		{
 			return -1;
 		}
-		for (unsigned int i = 0; i <= mStringSize - sSize; i++)
+		if (sSize == 0)
+		{
+			return 0;
+		}
+
+		for (unsigned int i = 0; i < mStringSize; i++)
 		{
 			if (mString[i] == s[cnt])
 			{
@@ -99,30 +104,30 @@ namespace assignment1
 
 	int MyString::LastIndexOf(const char* s)
 	{
-		int returnVal = -1;
 		int mStringSize = myStrlen(mString);
 		int sSize = myStrlen(s);
 		int cnt = sSize - 1;
 
-		if (s == nullptr)
+		if (s == nullptr || sSize > mStringSize)
 		{
-			return returnVal;
+			return -1;
+		}
+		if (sSize == 0)
+		{
+			return mStringSize;
 		}
 		for (int i = mStringSize; i >= 0; i--)
 		{
-			if (mStringSize - sSize >= i)
+			if (mString[i] == s[cnt])
 			{
-				if (mString[i] == s[cnt])
-				{
-					cnt--;
-				}
-				if (cnt == -1)
-				{
-					return i;
-				}
+				cnt--;
+			}
+			if (cnt == -1)
+			{
+				return i;
 			}
 		}
-		return returnVal;
+		return -1;
 	}
 
 	void MyString::Interleave(const char* s)
@@ -398,7 +403,7 @@ namespace assignment1
 		char* str = new char[len - pos + 2];
 
 		for (int i = 0; i < len; i++)
-		{			
+		{
 			str[i] = src[pos + i];
 		}
 		str[len] = '\0';

@@ -14,19 +14,19 @@ void test3();
 int main()
 {
 	test();
-	//for (int i = 0; i < 100; i++)
-	//{
-		//test0();
-		//test1();
-		//test2();
-		//test3();
-	//}
+	for (int i = 0; i < 100; i++)
+	{
+		test0();
+		test1();
+		test2();
+		test3();
+	}
 }
 
 void test()
 {
 	MyString s("Heelloa");
-	s.LastIndexOf("ell");
+	s.IndexOf("el");
 
 }
 
@@ -52,10 +52,13 @@ void test0()
 	assert(my1.IndexOf("pope pope love") == s1.find("pope pope love"));
 	assert(my1.LastIndexOf("pope pope love") == s1.rfind("pope pope love"));
 
+
 	assert(my1.IndexOf(" pope") == s1.find(" pope"));
 	assert(my1.LastIndexOf("pope ") == s1.rfind("pope "));
 
 	// E2, E3
+	int tmp = s1.rfind("");
+
 	assert(my1.IndexOf("") == s1.find(""));
 	assert(my1.LastIndexOf("") == s1.rfind(""));
 
