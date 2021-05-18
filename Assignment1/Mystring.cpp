@@ -75,22 +75,26 @@ namespace assignment1
 
 	int MyString::IndexOf(const char* s)
 	{
-		int returnVal = -1;
+		int mStringSize = GetLength();
 		int sSize = myStrlen(s);
+		int cnt = 0;
 
-		if (s != nullptr)
+		if (s == nullptr)
 		{
-			for (unsigned int i = 0; i <= GetLength(); i++)
+			return -1;
+		}
+		for (unsigned int i = 0; i <= mStringSize - sSize; i++)
+		{
+			if (mString[i] == s[cnt])
 			{
-				const char* subStr = subString(&mString[i], 0, sSize);
-				if (strCmp(subStr, s))
-				{
-					returnVal = i;
-					break;
-				}
+				cnt++;
+			}
+			if (cnt == sSize)
+			{
+				return i - cnt + 1;
 			}
 		}
-		return returnVal;
+		return -1;
 	}
 
 	int MyString::LastIndexOf(const char* s)
@@ -98,19 +102,23 @@ namespace assignment1
 		int returnVal = -1;
 		int mStringSize = myStrlen(mString);
 		int sSize = myStrlen(s);
+		int cnt = sSize - 1;
 
-		if (s != nullptr)
+		if (s == nullptr)
 		{
-			for (int i = mStringSize; i >= 0; i--)
+			return returnVal;
+		}
+		for (int i = mStringSize; i >= 0; i--)
+		{
+			if (mStringSize - sSize >= i)
 			{
-				if (mStringSize - sSize >= i)
+				if (mString[i] == s[cnt])
 				{
-					const char* subStr = subString(&mString[i], 0, sSize);
-					if (strCmp(subStr, s))
-					{
-						returnVal = i;
-						break;
-					}
+					cnt--;
+				}
+				if (cnt == -1)
+				{
+					return i;
 				}
 			}
 		}
@@ -121,7 +129,7 @@ namespace assignment1
 	{
 		int mStringSize = GetLength();
 		int sSize = myStrlen(s);
-		
+
 		if (sSize > 0)
 		{
 			int minSize = sSize;
@@ -308,7 +316,7 @@ namespace assignment1
 
 		if (mStringSize == rhsSize)
 		{
-			for (int i = 0; i < mStringSize; i++)
+			for (unsigned int i = 0; i < mStringSize; i++)
 			{
 				if (mString[i] != rhs.mString[i])
 				{
@@ -325,8 +333,8 @@ namespace assignment1
 
 	MyString& MyString::operator=(const MyString& rhs)
 	{
+		mSize = rhs.mSize;
 		charCpy(mString, rhs.mString, mSize);
-
 		return *this;
 	}
 
@@ -384,16 +392,16 @@ namespace assignment1
 		}
 	}
 
-	char* MyString::subString(const char* src, int start, int number)
+	char* MyString::subString(const char* src, int pos, int len)
 	{
-		int sSize = number - start + 1;
-		char* str = new char[number - start + 2];
+		int sSize = len - pos + 1;
+		char* str = new char[len - pos + 2];
 
-		for (int i = 0; i < number; i++)
-		{
-			str[i] = src[start + i];
+		for (int i = 0; i < len; i++)
+		{			
+			str[i] = src[pos + i];
 		}
-		str[number] = '\0';
+		str[len] = '\0';
 		return str;
 	}
 
