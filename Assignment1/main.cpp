@@ -11,7 +11,9 @@ void test3();
 
 int main()
 {
+	//test1();
 	test2();
+	test3();
 }
 
 void test1()
@@ -257,11 +259,17 @@ void test2()
 	assert(emptyIndexOfTest.IndexOf("") == 0);
 	assert(emptyIndexOfTest.LastIndexOf("") == emptyIndexOfTest.GetLength());
 
-	MyString interLeaveTest("");
+	MyString interLeaveTest("Hello");
 	int previousInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
 	interLeaveTest.Interleave("");
 	int currentInterLeaveTestStrAddress = reinterpret_cast<int>(interLeaveTest.GetCString());
 	assert(previousInterLeaveTestStrAddress == currentInterLeaveTestStrAddress);
+
+	MyString emptyInterLeaveTest("");
+	int previousEmptyInterLeaveTestStrAddress = reinterpret_cast<int>(emptyInterLeaveTest.GetCString());
+	emptyInterLeaveTest.Interleave("");
+	int currentEmptyInterLeaveTestStrAddress = reinterpret_cast<int>(emptyInterLeaveTest.GetCString());
+	assert(previousEmptyInterLeaveTestStrAddress == currentEmptyInterLeaveTestStrAddress);
 
 	std::cout << std::boolalpha;
 	MyString removeTest("Hello");

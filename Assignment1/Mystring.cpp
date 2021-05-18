@@ -40,25 +40,29 @@ namespace assignment1
 	void MyString::Append(const char* s)
 	{
 		size_t sSize = myStrlen(s);
-		char* appendStr = new char[mSize + sSize + 1];
 
-		size_t cnt;
-		for (cnt = 0; cnt < mSize - 1; cnt++)
+		if (sSize > 0)
 		{
-			appendStr[cnt] = mString[cnt];
+			char* appendStr = new char[mSize + sSize + 1];
+
+			size_t cnt;
+			for (cnt = 0; cnt < mSize - 1; cnt++)
+			{
+				appendStr[cnt] = mString[cnt];
+			}
+			for (size_t sCnt = 0; sCnt < sSize; sCnt++)
+			{
+				appendStr[cnt++] = s[sCnt];
+			}
+			appendStr[cnt] = '\0';
+
+			delete[] mString;
+			mString = new char[mSize + sSize];
+
+			charCpy(mString, appendStr, mSize + sSize);
+
+			delete[] appendStr;
 		}
-		for (size_t sCnt = 0; sCnt < sSize; sCnt++)
-		{
-			appendStr[cnt++] = s[sCnt];
-		}
-		appendStr[cnt] = '\0';
-
-		delete[] mString;
-		mString = new char[mSize + sSize];
-
-		charCpy(mString, appendStr, mSize + sSize);
-
-		delete[] appendStr;
 	}
 
 	MyString MyString::operator+(const MyString& other) const
@@ -117,40 +121,43 @@ namespace assignment1
 	{
 		int mStringSize = GetLength();
 		int sSize = myStrlen(s);
-
-		int minSize = sSize;
-		int maxSize = mStringSize;
-		if (mStringSize < sSize)
+		
+		if (sSize > 0)
 		{
-			minSize = mStringSize;
-			maxSize = sSize;
-		}
-		char* str = new char[minSize + maxSize + 1];
-
-		for (int i = 0; i < minSize; i++)
-		{
-			str[i * 2] = mString[i];
-			str[(i * 2) + 1] = s[i];
-		}
-
-		int cnt = minSize;
-		for (int i = minSize * 2; i < minSize + maxSize; i++)
-		{
-			if (mStringSize > sSize)
+			int minSize = sSize;
+			int maxSize = mStringSize;
+			if (mStringSize < sSize)
 			{
-				str[i] = mString[cnt++];
+				minSize = mStringSize;
+				maxSize = sSize;
 			}
-			else
-			{
-				str[i] = s[cnt++];
-			}
-		}
-		str[minSize + maxSize] = '\0';
+			char* str = new char[minSize + maxSize + 1];
 
-		delete[] mString;
-		mString = new char[minSize + maxSize + 1];
-		charCpy(mString, str, minSize + maxSize + 1);
-		delete[] str;
+			for (int i = 0; i < minSize; i++)
+			{
+				str[i * 2] = mString[i];
+				str[(i * 2) + 1] = s[i];
+			}
+
+			int cnt = minSize;
+			for (int i = minSize * 2; i < minSize + maxSize; i++)
+			{
+				if (mStringSize > sSize)
+				{
+					str[i] = mString[cnt++];
+				}
+				else
+				{
+					str[i] = s[cnt++];
+				}
+			}
+			str[minSize + maxSize] = '\0';
+
+			delete[] mString;
+			mString = new char[minSize + maxSize + 1];
+			charCpy(mString, str, minSize + maxSize + 1);
+			delete[] str;
+		}
 	}
 
 	bool MyString::RemoveAt(unsigned int i)
@@ -318,7 +325,7 @@ namespace assignment1
 
 	MyString& MyString::operator=(const MyString& rhs)
 	{
-		mString = rhs.mString;
+		charCpy(mString, rhs.mString, mSize);
 
 		return *this;
 	}
