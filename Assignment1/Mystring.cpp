@@ -318,6 +318,8 @@ namespace assignment1
 
 	MyString& MyString::operator=(const MyString& rhs)
 	{
+		mString = rhs.mString;
+
 		return *this;
 	}
 
