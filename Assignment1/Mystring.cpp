@@ -71,16 +71,19 @@ namespace assignment1
 
 	int MyString::IndexOf(const char* s)
 	{
+		int returnVal = -1;
 		int sSize = myStrlen(s);
 
-		int returnVal = -1;
-		for (unsigned int i = 0; i < GetLength(); i++)
+		if (s != nullptr)
 		{
-			const char* subStr = subString(&mString[i], 0, sSize);
-			if (strCmp(subStr, s))
+			for (unsigned int i = 0; i < GetLength(); i++)
 			{
-				returnVal = i;
-				break;
+				const char* subStr = subString(&mString[i], 0, sSize);
+				if (strCmp(subStr, s))
+				{
+					returnVal = i;
+					break;
+				}
 			}
 		}
 		return returnVal;
@@ -88,19 +91,22 @@ namespace assignment1
 
 	int MyString::LastIndexOf(const char* s)
 	{
+		int returnVal = -1;
 		int mStringSize = myStrlen(mString);
 		int sSize = myStrlen(s);
 
-		int returnVal = -1;
-		for (int i = mStringSize; i >= 0; i--)
+		if (s != nullptr)
 		{
-			if (mStringSize - sSize >= i)
+			for (int i = mStringSize; i >= 0; i--)
 			{
-				const char* subStr = subString(&mString[i], 0, sSize);
-				if (strCmp(subStr, s))
+				if (mStringSize - sSize >= i)
 				{
-					returnVal = i;
-					break;
+					const char* subStr = subString(&mString[i], 0, sSize);
+					if (strCmp(subStr, s))
+					{
+						returnVal = i;
+						break;
+					}
 				}
 			}
 		}
@@ -290,8 +296,8 @@ namespace assignment1
 
 	bool MyString::operator==(const MyString& rhs) const
 	{
-		int mStringSize = GetLength();
-		int rhsSize = rhs.GetLength();
+		unsigned int mStringSize = GetLength();
+		unsigned int rhsSize = rhs.GetLength();
 
 		if (mStringSize == rhsSize)
 		{
@@ -340,20 +346,25 @@ namespace assignment1
 
 	int MyString::myStrlen(const char* str)
 	{
-		int strLen = 0;
-
-		while (str[strLen] != '\0')
+		int cnt = 0;
+		if (str != nullptr)
 		{
-			strLen++;
+			while (str[cnt] != '\0')
+			{
+				cnt++;
+			}
 		}
-		return strLen;
+		return cnt;
 	}
 
 	void MyString::charCpy(char* dst, const char* src, size_t srcSize)
 	{
-		for (size_t cnt = 0; cnt < srcSize; cnt++)
+		if (dst != nullptr && src != nullptr)
 		{
-			dst[cnt] = src[cnt];
+			for (size_t cnt = 0; cnt < srcSize; cnt++)
+			{
+				dst[cnt] = src[cnt];
+			}
 		}
 	}
 
@@ -391,5 +402,5 @@ namespace assignment1
 		}
 	}
 
-	
+
 }
