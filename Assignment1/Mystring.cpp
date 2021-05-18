@@ -7,7 +7,6 @@ namespace assignment1
 	{
 		mString = new char[mSize];
 		charCpy(mString, s, mSize);
-		mString[mSize - 1] = '\0';
 	}
 
 	MyString::MyString(const MyString& other)
@@ -15,7 +14,6 @@ namespace assignment1
 	{
 		mString = new char[mSize];
 		charCpy(mString, other.mString, mSize);
-		mString[mSize - 1] = '\0';
 	}
 
 	MyString::~MyString()
@@ -42,7 +40,7 @@ namespace assignment1
 	void MyString::Append(const char* s)
 	{
 		size_t sSize = myStrlen(s);
-		char* appendStr = new char[mSize + sSize];
+		char* appendStr = new char[mSize + sSize + 1];
 
 		size_t cnt;
 		for (cnt = 0; cnt < mSize - 1; cnt++)
