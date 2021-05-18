@@ -72,7 +72,7 @@ namespace assignment1
 	int MyString::IndexOf(const char* s)
 	{
 		int returnVal = -1;
-		for (int i = 0; i < MyStrlen(mString); i++)
+		for (int i = 0; i < GetLength(); i++)
 		{
 			if (mString[i] == s[0])
 			{
@@ -99,7 +99,7 @@ namespace assignment1
 
 	void MyString::Interleave(const char* s)
 	{
-		int mStringSize = MyStrlen(mString);
+		int mStringSize = GetLength();
 		int sSize = MyStrlen(s);
 
 		int minSize = sSize;
@@ -139,7 +139,7 @@ namespace assignment1
 
 	bool MyString::RemoveAt(unsigned int i)
 	{
-		unsigned int mStringSize = MyStrlen(mString);
+		unsigned int mStringSize = GetLength();
 		if (mStringSize > i)
 		{
 			char* str = new char[mStringSize];
@@ -149,7 +149,7 @@ namespace assignment1
 				str[cnt] = mString[cnt + 1];
 			}
 			str[mStringSize - 1] = '\0';
-			
+
 			delete[] mString;
 			mString = new char[mStringSize];
 			CharCpy(mString, str, mStringSize);
@@ -165,27 +165,132 @@ namespace assignment1
 
 	void MyString::PadLeft(unsigned int totalLength)
 	{
+		int mStringSize = GetLength();
+		char addChar = ' ';
+
+		if (totalLength > mStringSize)
+		{
+			char* str = new char[totalLength + 1];
+
+			unsigned int addCnt = totalLength - mStringSize;
+			for (unsigned int i = 0; i < addCnt; i++)
+			{
+				str[i] = addChar;
+			}
+			for (unsigned int i = addCnt; i < totalLength; i++)
+			{
+				str[i] = mString[i - addCnt];
+			}
+			str[totalLength] = '\0';
+
+			delete[] mString;
+			mString = new char[totalLength + 1];
+			CharCpy(mString, str, totalLength + 1);
+			delete[] str;
+		}
 	}
 
 	void MyString::PadLeft(unsigned int totalLength, const char c)
 	{
+		int mStringSize = GetLength();
+		char addChar = c;
+
+		if (totalLength > mStringSize)
+		{
+			char* str = new char[totalLength + 1];
+
+			unsigned int addCnt = totalLength - mStringSize;
+			for (unsigned int i = 0; i < addCnt; i++)
+			{
+				str[i] = addChar;
+			}
+			for (unsigned int i = addCnt; i < totalLength; i++)
+			{
+				str[i] = mString[i - addCnt];
+			}
+			str[totalLength] = '\0';
+
+			delete[] mString;
+			mString = new char[totalLength + 1];
+			CharCpy(mString, str, totalLength + 1);
+			delete[] str;
+		}
 	}
 
 	void MyString::PadRight(unsigned int totalLength)
 	{
+		int mStringSize = GetLength();
+		char addChar = ' ';
+
+		if (totalLength > mStringSize)
+		{
+			char* str = new char[totalLength + 1];
+			unsigned int addCnt = totalLength - mStringSize;
+
+			CharCpy(str, mString, mStringSize);
+			for (unsigned int i = mStringSize; i < totalLength; i++)
+			{
+				str[i] = addChar;
+			}
+			str[totalLength] = '\0';
+
+			delete[] mString;
+			mString = new char[totalLength + 1];
+			CharCpy(mString, str, totalLength + 1);
+			delete[] str;
+		}
 	}
 
 	void MyString::PadRight(unsigned int totalLength, const char c)
 	{
+		int mStringSize = GetLength();
+		char addChar = c;
+
+		if (totalLength > mStringSize)
+		{
+			char* str = new char[totalLength + 1];
+			unsigned int addCnt = totalLength - mStringSize;
+
+			CharCpy(str, mString, mStringSize);
+			for (unsigned int i = mStringSize; i < totalLength; i++)
+			{
+				str[i] = addChar;
+			}
+			str[totalLength] = '\0';
+
+			delete[] mString;
+			mString = new char[totalLength + 1];
+			CharCpy(mString, str, totalLength + 1);
+			delete[] str;
+		}
 	}
 
 	void MyString::Reverse()
 	{
+		int mStringSize = GetLength();
+		char tmp = NULL;
+
+		for (int i = 0; i < mStringSize / 2; i++)
+		{
+			tmp = mString[i];
+			mString[i] = mString[mStringSize - i - 1];
+			mString[mStringSize - i - 1] = tmp;
+		}
 	}
 
 	bool MyString::operator==(const MyString& rhs) const
 	{
-		return false;
+		int mStringSize = GetLength();
+		int rhsSize = rhs.GetLength();
+
+		if (mStringSize == rhsSize)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	MyString& MyString::operator=(const MyString& rhs)
@@ -193,14 +298,35 @@ namespace assignment1
 		return *this;
 	}
 
+	// ASCII : Dec		Hex
+	// A ~ Z : 65 ~ 90  0x41 ~ 0x5A
+	// a ~ z : 97 ~ 122 0x61 ~ 0x7A
+	// ( - ) : 32		0x20
 	void MyString::ToLower()
 	{
+		int mStringSize = GetLength();
+
+		for (int i = 0; i < mStringSize; i++)
+		{
+			if ((mString[i] >= 0x41) && (mString[i] <= 0x5A)) //대문자
+			{
+				mString[i] += 0x20;
+			}
+		}
 	}
 
 	void MyString::ToUpper()
 	{
-	}
+		int mStringSize = GetLength();
 
+		for (int i = 0; i < mStringSize; i++)
+		{
+			if ((mString[i] >= 0x61) && (mString[i] <= 0x7A)) //소문자
+			{
+				mString[i] -= 0x20;
+			}
+		}
+	}
 
 	int MyString::MyStrlen(const char* str)
 	{

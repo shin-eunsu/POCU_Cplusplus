@@ -1,4 +1,5 @@
 #pragma once
+
 namespace assignment1
 {
 	class MyString
