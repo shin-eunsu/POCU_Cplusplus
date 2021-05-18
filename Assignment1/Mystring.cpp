@@ -76,7 +76,7 @@ namespace assignment1
 
 		if (s != nullptr)
 		{
-			for (unsigned int i = 0; i < GetLength(); i++)
+			for (unsigned int i = 0; i <= GetLength(); i++)
 			{
 				const char* subStr = subString(&mString[i], 0, sSize);
 				if (strCmp(subStr, s))
@@ -301,6 +301,13 @@ namespace assignment1
 
 		if (mStringSize == rhsSize)
 		{
+			for (int i = 0; i < mStringSize; i++)
+			{
+				if (mString[i] != rhs.mString[i])
+				{
+					return false;
+				}
+			}
 			return true;
 		}
 		else

@@ -5,7 +5,7 @@
 using namespace std;
 using namespace assignment1;
 
-void test();
+void test1();
 void test2();
 void test3();
 
@@ -14,7 +14,7 @@ int main()
 	test2();
 }
 
-void test()
+void test1()
 {
 	/* GetLength() Ex */
 	cout << "-----------------------" << endl;

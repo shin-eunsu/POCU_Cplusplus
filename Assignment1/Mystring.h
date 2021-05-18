@@ -25,8 +25,7 @@ namespace assignment1
 		bool operator==(const MyString& rhs) const;
 		MyString& operator=(const MyString& rhs);
 		void ToLower();
-		void ToUpper();
-		
+		void ToUpper();		
 
 	private:
 		char* mString;
