@@ -76,7 +76,7 @@ namespace assignment1
 	int MyString::IndexOf(const char* s)
 	{
 		unsigned int mStringSize = GetLength();
-		int sSize = myStrlen(s);
+		unsigned int sSize = myStrlen(s);
 		int cnt = 0;
 
 		if (s == nullptr || sSize > mStringSize)
@@ -339,7 +339,7 @@ namespace assignment1
 	MyString& MyString::operator=(const MyString& rhs)
 	{
 		mSize = rhs.mSize;
-		charCpy(mString, rhs.mString, mSize + 1);
+		*mString = *rhs.mString;
 		return *this;
 	}
 
