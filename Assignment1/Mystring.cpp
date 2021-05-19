@@ -338,11 +338,16 @@ namespace assignment1
 
 	MyString& MyString::operator=(const MyString& rhs)
 	{
+		char* tmp = new char[rhs.mSize];
+		int tmpSize = rhs.mSize;
+		charCpy(tmp, rhs.mString, rhs.mSize);
+
 		delete[] mString;
-		mSize = rhs.mSize;
-		mString = new char[mSize];
-		charCpy(mString, rhs.mString, mSize);
-		 
+		mSize = tmpSize;
+		mString = new char[tmpSize];
+		charCpy(mString, tmp, tmpSize);
+
+		delete[] tmp;
 		return *this;
 	}
 

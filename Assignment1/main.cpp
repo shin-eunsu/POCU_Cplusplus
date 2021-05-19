@@ -1,6 +1,12 @@
 #include "Mystring.h"
 #include <iostream>
 #include <cassert>
+#include <crtdbg.h>
+
+#if _DEBUG
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define malloc(s) _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#endif
 
 using namespace std;
 using namespace assignment1;
@@ -18,15 +24,15 @@ int main()
 	test1();
 	test2();
 	test3();
+
+	_CrtDumpMemoryLeaks();
 }
 
 void test()
 {
 	MyString s("Hello");
 	MyString s2("123");
-	//s.IndexOf("123");
-	//MyString s2 = "aa";
-	s = "555";
+	
 	s = s;
 }
 
