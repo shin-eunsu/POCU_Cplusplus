@@ -27,6 +27,7 @@ void test()
 	//s.IndexOf("123");
 	//MyString s2 = "aa";
 	s = "555";
+	s = s;
 }
 
 void test0()

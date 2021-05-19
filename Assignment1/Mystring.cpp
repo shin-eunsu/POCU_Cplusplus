@@ -339,8 +339,8 @@ namespace assignment1
 	MyString& MyString::operator=(const MyString& rhs)
 	{
 		delete[] mString;
-		mString = new char[rhs.mSize + 1];
 		mSize = rhs.mSize;
+		mString = new char[mSize];
 		charCpy(mString, rhs.mString, mSize);
 		 
 		return *this;
