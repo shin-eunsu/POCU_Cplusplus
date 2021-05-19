@@ -23,9 +23,10 @@ int main()
 void test()
 {
 	MyString s("Hello");
-	s.IndexOf("123");
-	MyString s2 = "aa";
-
+	MyString s2("123");
+	//s.IndexOf("123");
+	//MyString s2 = "aa";
+	s = "555";
 }
 
 void test0()
