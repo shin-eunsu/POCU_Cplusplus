@@ -340,6 +340,7 @@ namespace assignment1
 	{
 		mSize = rhs.mSize;
 		*mString = *rhs.mString;
+		delete[] rhs.mString;
 		return *this;
 	}
 

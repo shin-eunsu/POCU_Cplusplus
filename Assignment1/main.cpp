@@ -14,13 +14,10 @@ void test3();
 int main()
 {
 	test();
-	//for (int i = 0; i < 100; i++)
-	//{
-		test0();
-		test1();
-		test2();
-		test3();
-	//}
+	test0();
+	test1();
+	test2();
+	test3();
 }
 
 void test()
