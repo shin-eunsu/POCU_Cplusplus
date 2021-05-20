@@ -18,11 +18,11 @@ namespace lab3
 		, mMaxEntries(other.mMaxEntries)
 		, mCnt(other.mCnt)
 	{
-		mName = new char[mNameSize];
-		memcpy(mName, other.mName, mNameSize);
-		mTime = new int[other.mMaxEntries]{ '\0' };
+		mName = new char[other.mNameSize];
+		memcpy(mName, other.mName, other.mNameSize);
+		mTime = new int[other.mMaxEntries] {'\0'};
 		memcpy(mTime, other.mTime, other.mMaxEntries);
-		mStr = mName;
+		mStr = other.mName;
 	}
 
 	TimeSheet::~TimeSheet()
@@ -51,7 +51,7 @@ namespace lab3
 	void TimeSheet::AddTime(int timeInHours)
 	{
 		unsigned int cnt = mCnt;
-		if (timeInHours >= minTime && timeInHours <= maxTime && cnt < mMaxEntries)
+		if (timeInHours >= MINTIME && timeInHours <= MAXTIME && cnt < mMaxEntries)
 		{
 			mTime[mCnt++] = timeInHours;
 		}

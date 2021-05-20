@@ -25,7 +25,7 @@ namespace lab3
 		unsigned int mMaxEntries;
 		std::string mStr;
 
-		const int minTime = 1;
-		const int maxTime = 10;
+		const int MINTIME = 1;
+		const int MAXTIME = 10;
 	};
 }
