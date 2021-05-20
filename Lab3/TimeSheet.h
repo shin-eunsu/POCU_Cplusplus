@@ -19,10 +19,11 @@ namespace lab3
 
 	private:
 		char* mName;
-		int mSaveTime[BUFSIZ];
+		int* mTime;
 		int mCnt;
 		size_t mNameSize ;
 		unsigned int mMaxEntries;
+		std::string mStr;
 
 		const int minTime = 1;
 		const int maxTime = 10;

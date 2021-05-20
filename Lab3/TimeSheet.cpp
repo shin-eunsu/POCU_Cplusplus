@@ -5,21 +5,30 @@ namespace lab3
 	TimeSheet::TimeSheet(const char* name, unsigned int maxEntries)
 		: mNameSize(strlen(name) + 1)
 		, mMaxEntries(maxEntries) // maxEntries : 저장가능 수량
-		, mSaveTime{ '\0' }
 		, mCnt(0)
 	{
 		mName = new char[mNameSize];
 		memcpy(mName, name, mNameSize);
+		mTime = new int[maxEntries] {'\0'};
+		mStr = mName;
 	}
 
 	TimeSheet::TimeSheet(const TimeSheet& other)
 		: mNameSize(other.mNameSize)
 		, mMaxEntries(other.mMaxEntries)
-		, mSaveTime{ '\0' }
-		, mCnt(0)
+		, mCnt(other.mCnt)
 	{
 		mName = new char[mNameSize];
 		memcpy(mName, other.mName, mNameSize);
+		mTime = new int[other.mMaxEntries]{ '\0' };
+		memcpy(mTime, other.mTime, other.mMaxEntries);
+		mStr = mName;
+	}
+
+	TimeSheet::~TimeSheet()
+	{
+		delete[] mName;
+		delete[] mTime;
 	}
 
 	TimeSheet& TimeSheet::operator=(const TimeSheet& rhs)
@@ -27,7 +36,7 @@ namespace lab3
 		mNameSize = rhs.mNameSize;
 		mMaxEntries = rhs.mMaxEntries;
 		mCnt = rhs.mCnt;
-		memcpy(mSaveTime, rhs.mSaveTime, BUFSIZ);
+		memcpy(mTime, rhs.mTime, rhs.mMaxEntries);
 
 		char* tmpName = new char[rhs.mNameSize];
 		memcpy(tmpName, rhs.mName, rhs.mNameSize);
@@ -39,16 +48,12 @@ namespace lab3
 		return *this;
 	}
 
-	TimeSheet::~TimeSheet()
-	{
-		delete[] mName;
-	}
-
 	void TimeSheet::AddTime(int timeInHours)
 	{
-		if (timeInHours >= minTime && timeInHours <= maxTime)
+		unsigned int cnt = mCnt;
+		if (timeInHours >= minTime && timeInHours <= maxTime && cnt < mMaxEntries)
 		{
-			mSaveTime[mCnt++] = timeInHours;
+			mTime[mCnt++] = timeInHours;
 		}
 	}
 
@@ -59,7 +64,7 @@ namespace lab3
 		{
 			return -1;
 		}
-		return mSaveTime[index];
+		return mTime[index];
 	}
 
 	int TimeSheet::GetTotalTime() const
@@ -67,7 +72,7 @@ namespace lab3
 		int sum = 0;
 		for (int i = 0; i < mCnt; i++)
 		{
-			sum += mSaveTime[mCnt];
+			sum += mTime[i];
 		}
 		return sum;
 	}
@@ -75,23 +80,30 @@ namespace lab3
 	float TimeSheet::GetAverageTime() const
 	{
 		int totalTime = GetTotalTime();
-		float avg = totalTime / static_cast<float>(mCnt);
+		float avg = 0;
+		if (mCnt != 0)
+		{
+			avg = totalTime / static_cast<float>(mCnt);
+		}
 
 		return avg;
 	}
 
 	float TimeSheet::GetStandardDeviation() const
 	{
-		float std;
-		float var;
 		float avg = GetAverageTime();
-		float sum = 0;
+		float var = 0.0f;
+		float std = 0.0f;
+		float sum = 0.0f;
 
 		for (int i = 0; i < mCnt; i++)
 		{
-			sum += powf(static_cast<float>(mSaveTime[mCnt]) - avg, 2);
+			sum += powf(static_cast<float>(mTime[i]) - avg, 2);
 		}
-		var = sum / static_cast<float>(mCnt);
+		if (mCnt != 0)
+		{
+			var = sum / static_cast<float>(mCnt);
+		}
 		std = sqrtf(var);
 
 		return std;
@@ -99,7 +111,6 @@ namespace lab3
 
 	const std::string& TimeSheet::GetName() const
 	{
-
-		return mName;
+		return mStr;
 	}
 }

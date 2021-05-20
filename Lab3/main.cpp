@@ -2,11 +2,14 @@
 #include <iostream>
 
 using namespace std;
-
+using namespace lab3;
 void test();
 
 int main()
 {
+	TimeSheet t1("eunsu", 5);
+	TimeSheet t2("suyeon", 6);
+	t1 = t2;
 	test();
 }
 
@@ -26,13 +29,13 @@ void test()
 	std::cout << employee1.GetTimeEntry(-1) << std::endl;   // -1
 	std::cout << employee1.GetTimeEntry(5) << std::endl;    // -1
 	std::cout << employee1.GetTimeEntry(4) << std::endl;    // 3
-	std::cout << employee1.GetTimeEntry(1) << std::endl;    // 5
+ 	std::cout << employee1.GetTimeEntry(1) << std::endl;    // 5
 	std::cout << employee1.GetTimeEntry(7) << std::endl;    // -1
 
 	std::cout << employee1.GetTotalTime() << std::endl;         // 26
 	std::cout << employee1.GetAverageTime() << std::endl;       // 5.2
 	std::cout << employee1.GetStandardDeviation() << std::endl; // 3.1241
-	//std::cout << employee1.GetName() << std::endl;              // John
+	std::cout << employee1.GetName() << std::endl;              // John
 
 	lab3::TimeSheet employee2("Pope", 10);
 	employee2.AddTime(4);    // ok
@@ -51,7 +54,7 @@ void test()
 	std::cout << pope.GetTotalTime() << std::endl;          // 25
 	std::cout << pope.GetAverageTime() << std::endl;        // 4.16667
 	std::cout << pope.GetStandardDeviation() << std::endl;  // 2.11476(모집단의 표준편차)
-	//std::cout << pope.GetName() << std::endl;               // Pope
+	std::cout << pope.GetName() << std::endl;               // Pope
 
 	lab3::TimeSheet hulk("HULK", 10);
 	std::cout << hulk.GetStandardDeviation() << std::endl;//0.0
