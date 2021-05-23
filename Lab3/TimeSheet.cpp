@@ -21,7 +21,10 @@ namespace lab3
 		mName = new char[other.mNameSize];
 		memcpy(mName, other.mName, other.mNameSize);
 		mTime = new int[other.mMaxEntries] {'\0'};
-		memcpy(mTime, other.mTime, other.mMaxEntries);
+		for (int i = 0; i < other.mMaxEntries; i++)
+		{
+			mTime[i] = other.mTime[i];
+		}
 		mStr = other.mName;
 	}
 
@@ -36,7 +39,13 @@ namespace lab3
 		mNameSize = rhs.mNameSize;
 		mMaxEntries = rhs.mMaxEntries;
 		mCnt = rhs.mCnt;
-		memcpy(mTime, rhs.mTime, rhs.mMaxEntries);
+
+		delete[] mTime;
+		mTime = new int[rhs.mMaxEntries]{ '\0' };
+		for (int i = 0; i < rhs.mMaxEntries; i++)
+		{
+			mTime[i] = rhs.mTime[i];
+		}
 
 		char* tmpName = new char[rhs.mNameSize];
 		memcpy(tmpName, rhs.mName, rhs.mNameSize);

@@ -1,20 +1,38 @@
 #include "TimeSheet.h"
 #include <iostream>
 
+#if _DEBUG
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define malloc(s) _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#endif
+
 using namespace std;
 using namespace lab3;
+
 void test();
 
 int main()
 {
-	TimeSheet t1("eunsu", 5);
-	TimeSheet t2("suyeon", 6);
-	t1 = t2;
 	test();
+	_CrtDumpMemoryLeaks();
 }
 
 void test()
 {
+	TimeSheet t1("Eunsu", 15);
+	t1.AddTime(2);
+	t1.AddTime(4);
+	t1.AddTime(8);
+
+	TimeSheet t2(t1);
+
+	t1.AddTime(6);
+	t2.AddTime(1);
+	t2.AddTime(3);
+
+	TimeSheet t3 = t1;
+	t3.AddTime(9);
+
 	lab3::TimeSheet employee1("John", 5);
 	employee1.AddTime(1);    // ok
 	employee1.AddTime(5);    // ok  
