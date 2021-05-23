@@ -33,6 +33,9 @@ void test()
 	TimeSheet t3 = t1;
 	t3.AddTime(9);
 
+	t1 = t1;
+	t1 = t3;
+
 	lab3::TimeSheet employee1("John", 5);
 	employee1.AddTime(1);    // ok
 	employee1.AddTime(5);    // ok  
