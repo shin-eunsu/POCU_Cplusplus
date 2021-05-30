@@ -10,6 +10,10 @@ void TestCaseMain();
 
 int main()
 {
+	//PolyLine pl;
+	//pl.AddPoint(1.2f, 2.3f);
+	//pl.AddPoint(3.3f, 4.4f);
+
 	TestCaseMain();
 
 	system("pause");
@@ -139,12 +143,12 @@ void PolyLineRemovePointTest()
 	assert(pl.RemovePoint(0) == true);
 	assert(pl.RemovePoint(0) == true);
 	assert(pl.RemovePoint(0) == false);
-
 	assert(pl.AddPoint(1.0f, 2.0f) == true);	// 중간에 있는 원소를 Remove했을 때
 	assert(pl.AddPoint(1.1f, 2.1f) == true);	// 해당 빈 공간의 처리를 잘 했는지
 	assert(pl.AddPoint(1.2f, 2.2f) == true);	// 테스트
 	assert(pl.AddPoint(1.3f, 2.3f) == true);
 	assert(pl.RemovePoint(1) == true);
+	
 	assert(pl[1]->GetX() == 1.2f && pl[1]->GetY() == 2.2f);
 	assert(pl[2]->GetX() == 1.3f && pl[2]->GetY() == 2.3f);
 	assert(pl[3] == nullptr);

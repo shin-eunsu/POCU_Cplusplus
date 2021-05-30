@@ -20,8 +20,7 @@ namespace lab4
 		PolyLine& operator=(const PolyLine& rhs);
 
 	private:
-		Point* mPoint;
+		Point* mPoint[10];
 		unsigned int mCnt;
-		const unsigned int MAXLENGTH = 10;
 	};
 }

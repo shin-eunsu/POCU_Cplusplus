@@ -37,6 +37,7 @@ namespace lab4
 		float yVal = mY - other.mY;
 		return Point(xVal, yVal);
 	}
+
 	float Point::Dot(const Point& other) const
 	{
 		float rVal = (mX * other.mX) + (mY * other.mY);
@@ -48,6 +49,14 @@ namespace lab4
 		float xVal = mX * operand;
 		float yVal = mY * operand;
 		return Point(xVal, yVal);
+	}
+
+	Point Point::operator=(const Point& other)
+	{
+		mX = other.mX;
+		mY = other.mY;
+
+		return *this;
 	}
 
 	Point operator*(float operand, const Point& rhs)
