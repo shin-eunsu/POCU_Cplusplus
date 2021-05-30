@@ -9,7 +9,7 @@ namespace lab4
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			polyLinePoint[i] = new Point();
+			PolyLinePoint[i] = new Point();
 		}
 	}
 
@@ -18,8 +18,8 @@ namespace lab4
 	{
 		for (unsigned int i = 0; i < 10; i++)
 		{
-			polyLinePoint[i] = new Point();
-			memcpy(polyLinePoint[i], other.polyLinePoint[i], sizeof(Point));
+			PolyLinePoint[i] = new Point();
+			memcpy(PolyLinePoint[i], other.PolyLinePoint[i], sizeof(Point));
 		}
 	}
 
@@ -27,20 +27,21 @@ namespace lab4
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			delete polyLinePoint[i];
+			delete PolyLinePoint[i];
 		}
 	}
 
 	PolyLine& PolyLine::operator=(const PolyLine& rhs)
 	{
 		mCnt = rhs.mCnt;
-		PolyLine* tmpPl = new PolyLine();
+		//PolyLine* tmpPl = new PolyLine();
 		for (int i = 0; i < 10; i++)
 		{
-			memcpy(tmpPl->polyLinePoint[i], rhs.polyLinePoint[i], sizeof(Point));
-			memcpy(polyLinePoint[i], tmpPl->polyLinePoint[i], sizeof(Point));
+			PolyLinePoint[i] = rhs.PolyLinePoint[i];
+			//memcpy(tmpPl->PolyLinePoint[i], rhs.PolyLinePoint[i], sizeof(Point));
+			//memcpy(PolyLinePoint[i], tmpPl->PolyLinePoint[i], sizeof(Point));
 		}
-		delete tmpPl;
+		//delete tmpPl;
 
 		return *this;
 	}
@@ -50,7 +51,7 @@ namespace lab4
 		if (mCnt < 10)
 		{
 			Point* tPoint = new Point(x, y);
-			memcpy(polyLinePoint[mCnt++], tPoint, sizeof(Point));
+			memcpy(PolyLinePoint[mCnt++], tPoint, sizeof(Point));
 			delete tPoint;
 
 			return true;
@@ -65,13 +66,7 @@ namespace lab4
 	{
 		if (mCnt < 10)
 		{
-			*polyLinePoint[mCnt++] = *point;
-
-			//Point* p1 = new Point();
-			//memcpy(p1, point, sizeof(Point));
-			//memcpy(polyLinePoint[mCnt++], p1, sizeof(Point));
-			//delete p1;
-
+			*PolyLinePoint[mCnt++] = *point;
 			return true;
 		}
 		else
@@ -89,12 +84,10 @@ namespace lab4
 				unsigned int cnt = 0;
 				for (cnt = i; cnt < mCnt - 1; cnt++)
 				{
-					memcpy(polyLinePoint[cnt], polyLinePoint[cnt + 1], sizeof(Point));
+					memcpy(PolyLinePoint[cnt], PolyLinePoint[cnt + 1], sizeof(Point));
 				}
 			}
-			//Point* tp = new Point();
-			//memcpy(mPoint[mCnt - 1], tp, sizeof(Point));
-			//delete tp;
+			//PolyLinePoint[mCnt - 1] = nullptr;
 			mCnt--;
 			return true;
 		}
@@ -108,28 +101,28 @@ namespace lab4
 	{
 		if (mCnt > 0)
 		{
-			float minX = polyLinePoint[0]->GetX();
-			float maxX = polyLinePoint[0]->GetX();
-			float minY = polyLinePoint[0]->GetY();
-			float maxY = polyLinePoint[0]->GetY();
+			float minX = PolyLinePoint[0]->GetX();
+			float maxX = PolyLinePoint[0]->GetX();
+			float minY = PolyLinePoint[0]->GetY();
+			float maxY = PolyLinePoint[0]->GetY();
 
 			for (unsigned int i = 0; i < mCnt; i++)
 			{
-				if (polyLinePoint[i]->GetX() < minX)
+				if (PolyLinePoint[i]->GetX() < minX)
 				{
-					minX = polyLinePoint[i]->GetX();
+					minX = PolyLinePoint[i]->GetX();
 				}
-				if (polyLinePoint[i]->GetX() > maxX)
+				if (PolyLinePoint[i]->GetX() > maxX)
 				{
-					maxX = polyLinePoint[i]->GetX();
+					maxX = PolyLinePoint[i]->GetX();
 				}
-				if (polyLinePoint[i]->GetY() < minY)
+				if (PolyLinePoint[i]->GetY() < minY)
 				{
-					minY = polyLinePoint[i]->GetY();
+					minY = PolyLinePoint[i]->GetY();
 				}
-				if (polyLinePoint[i]->GetY() > maxY)
+				if (PolyLinePoint[i]->GetY() > maxY)
 				{
-					maxY = polyLinePoint[i]->GetY();
+					maxY = PolyLinePoint[i]->GetY();
 				}
 			}
 
@@ -146,13 +139,13 @@ namespace lab4
 
 	const Point* PolyLine::operator[](unsigned int i) const
 	{
-		if (polyLinePoint[i] == nullptr || i >= mCnt)
+		if (PolyLinePoint[i] == nullptr || i >= mCnt)
 		{
 			return nullptr;
 		}
 
-		float xVal = polyLinePoint[i]->GetX();
-		float yVal = polyLinePoint[i]->GetY();
+		float xVal = PolyLinePoint[i]->GetX();
+		float yVal = PolyLinePoint[i]->GetY();
 
 		return new Point(xVal, yVal);
 	}

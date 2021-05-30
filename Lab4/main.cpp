@@ -11,29 +11,40 @@
 using namespace lab4;
 using namespace std;
 
+void Test0();
 void Test();
 void TestCaseMain();
 
 int main()
 {
-	PolyLine pl1;
-	pl1.AddPoint(99, 123);
-
-	pl1 = pl1;
-
-	PolyLine pl2(pl1);
-	PolyLine pl3 = pl2;
-
-	PolyLine* pl4 = new PolyLine(pl2);
-	PolyLine* pl5 = new PolyLine(pl3);
-
-	delete pl4;
-
+	Test0();
 	Test();
 	TestCaseMain();
 	_CrtDumpMemoryLeaks();
 
 	//system("pause");
+}
+
+
+void Test0()
+{
+	Point* p1 = new Point(12.4f, 5.5f);
+	Point* p2 = new Point(1.1f, 2.2f);
+
+	PolyLine pl1;
+	pl1.AddPoint(p1);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
+	pl1.AddPoint(p2);
 }
 
 void Test()
