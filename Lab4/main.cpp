@@ -17,12 +17,12 @@ void TestCaseMain();
 
 int main()
 {
-	Test0();
-	Test();
+	//Test0();
+	//Test();
 	TestCaseMain();
 	_CrtDumpMemoryLeaks();
 
-	//system("pause");
+	system("pause");
 }
 
 
