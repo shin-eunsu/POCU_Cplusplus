@@ -2,9 +2,21 @@
 
 namespace lab4
 {
+	Point::Point()
+		: mX(0)
+		, mY(0)
+	{
+	}
+
 	Point::Point(float x, float y)
 		: mX(x)
 		, mY(y)
+	{
+	}
+
+	Point::Point(const Point& other)
+		: mX(other.mX)
+		, mY(other.mY)
 	{
 	}
 
@@ -25,7 +37,6 @@ namespace lab4
 		float yVal = mY - other.mY;
 		return Point(xVal, yVal);
 	}
-
 	float Point::Dot(const Point& other) const
 	{
 		float rVal = (mX * other.mX) + (mY * other.mY);
