@@ -22,7 +22,7 @@ int main()
 	TestCaseMain();
 	_CrtDumpMemoryLeaks();
 
-	system("pause");
+	//system("pause");
 }
 
 
@@ -34,6 +34,7 @@ void Test0()
 	PolyLine pl1;
 	pl1.AddPoint(p1);
 	pl1.AddPoint(p2);
+	pl1 = pl1;
 	pl1.AddPoint(p2);
 	pl1.AddPoint(p2);
 	pl1.AddPoint(p2);
@@ -163,6 +164,7 @@ void PolyLineAddPointTest()
 
 	assert(pl.AddPoint(1.0f, 2.0f) == true);
 	assert(pl.AddPoint(new Point(2.0f, 3.0f)) == true);
+
 	assert(pl.AddPoint(2.2f, 1.9f) == true);  // pl¿∫ [1.0f, 2.0f], [2.0f, 3.0f], [2.2f, 1.9f]
 	assert(pl.AddPoint(5.2f, 8.9f) == true);
 	assert(pl.AddPoint(2.2f, 1.4f) == true);

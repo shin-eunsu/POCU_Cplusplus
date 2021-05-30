@@ -9,14 +9,14 @@ namespace lab4
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			PolyLinePoint[i] = nullptr;
+			PolyLinePoint[i] = new Point();
 		}
 	}
 
 	PolyLine::PolyLine(const PolyLine& other)
 		: mCnt(other.mCnt)
 	{
-		for (unsigned int i = 0; i < other.mCnt; i++)
+		for (unsigned int i = 0; i < 10; i++)
 		{
 			PolyLinePoint[i] = new Point();
 			memcpy(PolyLinePoint[i], other.PolyLinePoint[i], sizeof(Point));
@@ -25,7 +25,7 @@ namespace lab4
 
 	PolyLine::~PolyLine()
 	{
-		for (int i = 0; i < mCnt; i++)
+		for (unsigned int i = 0; i < 10; i++)
 		{
 			delete PolyLinePoint[i];
 		}
@@ -34,15 +34,15 @@ namespace lab4
 	PolyLine& PolyLine::operator=(const PolyLine& rhs)
 	{
 		mCnt = rhs.mCnt;
-		//PolyLine* tmpPl = new PolyLine();
-		for (int i = 0; i < rhs.mCnt; i++)
+		PolyLine* tmpPl = new PolyLine();		
+		for (unsigned int i = 0; i < 10; i++)
 		{
+			tmpPl->PolyLinePoint[i] = new Point();
+			memcpy(tmpPl->PolyLinePoint[i], rhs.PolyLinePoint[i], sizeof(Point));
 			PolyLinePoint[i] = new Point();
-			PolyLinePoint[i] = rhs.PolyLinePoint[i];
-			//memcpy(tmpPl->PolyLinePoint[i], rhs.PolyLinePoint[i], sizeof(Point));
-			//memcpy(PolyLinePoint[i], tmpPl->PolyLinePoint[i], sizeof(Point));
+			memcpy(PolyLinePoint[i], tmpPl->PolyLinePoint[i], sizeof(Point));
 		}
-		//delete tmpPl;
+		delete tmpPl;
 
 		return *this;
 	}
@@ -51,11 +51,12 @@ namespace lab4
 	{
 		if (mCnt < 10)
 		{
+			Point* tmpPoint = new Point(x, y);
 			PolyLinePoint[mCnt] = new Point(x, y);
-			mCnt++;
-			//Point* tPoint = new Point(x, y);
-			//memcpy(PolyLinePoint[mCnt++], tPoint, sizeof(Point));
-			//delete tPoint;
+			memcpy(PolyLinePoint[mCnt++], tmpPoint, sizeof(tmpPoint));
+			delete tmpPoint;
+
+			return true;
 
 			return true;
 		}
@@ -69,7 +70,6 @@ namespace lab4
 	{
 		if (mCnt < 10)
 		{
-			PolyLinePoint[mCnt] = new Point();
 			*PolyLinePoint[mCnt++] = *point;
 			return true;
 		}
