@@ -90,9 +90,9 @@ namespace lab4
 					memcpy(mPoint[cnt], mPoint[cnt + 1], sizeof(Point));
 				}
 			}
-			Point* tp = new Point();
-			memcpy(mPoint[mCnt - 1], tp, sizeof(Point));
-			delete tp;
+			//Point* tp = new Point();
+			//memcpy(mPoint[mCnt - 1], tp, sizeof(Point));
+			//delete tp;
 			mCnt--;
 			return true;
 		}
