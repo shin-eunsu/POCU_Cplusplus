@@ -13,7 +13,7 @@ void test();
 
 int main()
 {
-	test();
+	//test();
 	_CrtDumpMemoryLeaks();
 }
 

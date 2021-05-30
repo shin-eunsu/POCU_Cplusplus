@@ -3,21 +3,36 @@
 #include "Point.h"
 #include "PolyLine.h"
 
+#if _DEBUG
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define malloc(s) _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#endif
+
 using namespace lab4;
 using namespace std;
 
+void Test();
 void TestCaseMain();
 
 int main()
 {
-	//PolyLine pl;
+	//Test();
+
+	TestCaseMain();
+	_CrtDumpMemoryLeaks();
+
+	//system("pause");
+}
+
+void Test()
+{
+	PolyLine pl;
 	//pl.AddPoint(1.2f, 2.3f);
 	//pl.AddPoint(3.3f, 4.4f);
 
-	TestCaseMain();
-
-	system("pause");
+	//PolyLine pl2 = pl;
 }
+
 
 void PointOperatePlusTest()
 {
@@ -98,7 +113,7 @@ void PolyLineAddPointTest()
 	assert(pl2.AddPoint(1.1f, 2.2f) == true);
 	assert(pl2.AddPoint(p1) == true);
 	assert(p1->GetX() == 2.2f && p1->GetY() == 3.3f);
-
+	
 	PolyLine pl3(pl2);
 	Point* p2 = new Point(22.22f, 33.33f);
 	assert(pl3.AddPoint(11.11f, 22.22f) == true);
@@ -238,7 +253,7 @@ void TestCaseMain()
 	PointDotProductTest();
 
 	PolyLineAddPointTest();
-	PolyLineRemovePointTest();
-	PolyLineTryGetMinBoundingRectangleTest();
-	PolyLineOperateIndexTest();
+	//PolyLineRemovePointTest();
+	//PolyLineTryGetMinBoundingRectangleTest();
+	//PolyLineOperateIndexTest();
 }
