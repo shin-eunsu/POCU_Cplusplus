@@ -63,9 +63,9 @@ namespace lab4
 
 	bool PolyLine::AddPoint(const Point* point)
 	{
+		Point* p1 = new Point();
 		if (mCnt < 10)
 		{
-			Point* p1 = new Point();
 			memcpy(p1, point, sizeof(Point));
 			memcpy(mPoint[mCnt++], p1, sizeof(Point));
 			delete p1;
