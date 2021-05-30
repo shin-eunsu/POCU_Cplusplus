@@ -22,6 +22,19 @@ namespace lab4
 		//memcpy(mPoint, other.mPoint, sizeof(Point) * MAXLENGTH);
 	}
 
+	PolyLine& PolyLine::operator=(const PolyLine& rhs)
+	{
+		mCnt = rhs.mCnt;
+		PolyLine* tmpPl = new PolyLine();
+		memcpy(tmpPl->mPoint, rhs.mPoint, sizeof(Point) * rhs.mCnt);
+
+		delete[] mPoint;
+		mPoint = new Point[rhs.mCnt];
+		memcpy(mPoint, tmpPl, sizeof(Point) * rhs.mCnt);
+
+		return *this;
+	}
+
 	PolyLine::~PolyLine()
 	{
 		delete[] mPoint;
@@ -75,23 +88,6 @@ namespace lab4
 
 	bool PolyLine::RemovePoint(unsigned int i)
 	{
-		//if (i < mCnt)
-		//{
-		//	if (i != mCnt - 1)
-		//	{
-
-		//	}
-		//	
-		//	for (unsigned int cnt = i; cnt < mCnt - 1; cnt++)
-		//	{
-		//		mPoint[cnt] = mPoint[cnt + 1];
-		//	}
-		//}
-		//else
-		//{
-		//	return false;
-		//}
-
 		if (i < mCnt)
 		{
 			if (i != mCnt - 1)
@@ -128,7 +124,7 @@ namespace lab4
 			float minY = mPoint[0].GetY();
 			float maxY = mPoint[0].GetY();
 
-			for (int i = 0; i < mCnt; i++)
+			for (unsigned int i = 0; i < mCnt; i++)
 			{
 				if (mPoint[i].GetX() < minX)
 				{
@@ -166,4 +162,6 @@ namespace lab4
 
 		return new Point(xVal, yVal);
 	}
+
+	
 }
