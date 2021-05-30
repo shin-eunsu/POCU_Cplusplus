@@ -18,9 +18,9 @@ namespace lab4
 
 		const Point* operator[](unsigned int i) const;
 		PolyLine& operator=(const PolyLine& rhs);
+		Point* polyLinePoint[10];
 
 	private:
-		Point* mPoint[10];
 		unsigned int mCnt;
 	};
 }
