@@ -27,10 +27,10 @@ int main()
 void Test()
 {
 	PolyLine pl;
-	//pl.AddPoint(1.2f, 2.3f);
-	//pl.AddPoint(3.3f, 4.4f);
+	pl.AddPoint(1.2f, 2.3f);
+	pl.AddPoint(3.3f, 4.4f);
 
-	//PolyLine pl2 = pl;
+	PolyLine pl2 = pl;
 }
 
 
@@ -253,7 +253,7 @@ void TestCaseMain()
 	PointDotProductTest();
 
 	PolyLineAddPointTest();
-	//PolyLineRemovePointTest();
-	//PolyLineTryGetMinBoundingRectangleTest();
-	//PolyLineOperateIndexTest();
+	PolyLineRemovePointTest();
+	PolyLineTryGetMinBoundingRectangleTest();
+	PolyLineOperateIndexTest();
 }
