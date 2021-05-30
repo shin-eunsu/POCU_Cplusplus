@@ -35,8 +35,11 @@ namespace lab4
 	{
 		mCnt = rhs.mCnt;
 		PolyLine* tmpPl = new PolyLine();
-		memcpy(*tmpPl->mPoint, rhs.mPoint, sizeof(Point));
-		memcpy(mPoint, *tmpPl->mPoint, sizeof(Point));
+		for (int i = 0; i < 10; i++)
+		{
+			memcpy(tmpPl->mPoint[i], rhs.mPoint[i], sizeof(Point));
+			memcpy(mPoint[i], tmpPl->mPoint[i], sizeof(Point));
+		}
 		delete tmpPl;
 
 		return *this;
@@ -152,5 +155,5 @@ namespace lab4
 		return new Point(xVal, yVal);
 	}
 
-	
+
 }

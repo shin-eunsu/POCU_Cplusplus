@@ -16,9 +16,18 @@ void TestCaseMain();
 
 int main()
 {
-	PolyLine p1;
-	p1.AddPoint(99, 999);
-	p1 = p1;
+	PolyLine pl1;
+	pl1.AddPoint(99, 123);
+
+	pl1 = pl1;
+
+	PolyLine pl2(pl1);
+	PolyLine pl3 = pl2;
+
+	PolyLine* pl4 = new PolyLine(pl2);
+	PolyLine* pl5 = new PolyLine(pl3);
+
+	delete pl4;
 
 	Test();
 	TestCaseMain();
