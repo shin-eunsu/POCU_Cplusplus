@@ -18,7 +18,6 @@ namespace lab4
 	{
 		for (unsigned int i = 0; i < 10; i++)
 		{
-			//mPoint[i] = other.mPoint[i];
 			mPoint[i] = new Point();
 			memcpy(mPoint[i], other.mPoint[i], sizeof(Point));
 		}
@@ -35,13 +34,10 @@ namespace lab4
 	PolyLine& PolyLine::operator=(const PolyLine& rhs)
 	{
 		mCnt = rhs.mCnt;
-		mPoint[mCnt] = rhs.mPoint[mCnt];
-
-		//mCnt = rhs.mCnt;
-		//PolyLine* tmpPl = new PolyLine();
-		//memcpy(tmpPl->mPoint, rhs.mPoint, sizeof(Point) * rhs.mCnt);
-		//memcpy(mPoint, tmpPl, sizeof(Point) * rhs.mCnt);
-		//delete tmpPl;
+		PolyLine* tmpPl = new PolyLine();
+		memcpy(*tmpPl->mPoint, rhs.mPoint, sizeof(Point));
+		memcpy(mPoint, *tmpPl->mPoint, sizeof(Point));
+		delete tmpPl;
 
 		return *this;
 	}
