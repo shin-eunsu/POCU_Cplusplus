@@ -17,9 +17,9 @@ void TestCaseMain();
 
 int main()
 {
-	//Test0();
+	Test0();
 	//Test();
-	TestCaseMain();
+	//TestCaseMain();
 	_CrtDumpMemoryLeaks();
 
 	//system("pause");
@@ -33,18 +33,6 @@ void Test0()
 
 	PolyLine pl1;
 	pl1.AddPoint(p1);
-	pl1.AddPoint(p2);
-	pl1 = pl1;
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
-	pl1.AddPoint(p2);
 	pl1.AddPoint(p2);
 }
 
