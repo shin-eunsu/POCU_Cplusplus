@@ -24,18 +24,18 @@ namespace lab5
 
 	unsigned int EquilateralTriangleLawn::GetFencePrice(eFenceType fenceType) const
 	{
-		double FenceUnitPrice = 0;
+		double fenceUnitPrice = 0;
 
 		switch (fenceType)
 		{
 		case lab5::RED_CEDAR:
-			FenceUnitPrice = 6 * 0.25;
+			fenceUnitPrice = 6 * 0.25;
 			break;
 		case lab5::SPRUCE:
-			FenceUnitPrice = 7 * 0.25;
+			fenceUnitPrice = 7 * 0.25;
 			break;
 		}
 
-		return GetMinimumFencesCount() * FenceUnitPrice;
+		return GetMinimumFencesCount() * fenceUnitPrice;
 	}
 }
