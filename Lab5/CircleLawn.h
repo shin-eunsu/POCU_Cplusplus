@@ -5,7 +5,7 @@
 
 namespace lab5
 {
-	class CircleLawn: public Lawn
+	class CircleLawn: public Lawn, public IFenceable
 	{
 	public:
 		CircleLawn(unsigned int radius);

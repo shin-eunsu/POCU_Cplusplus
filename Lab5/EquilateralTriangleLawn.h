@@ -5,7 +5,7 @@
 
 namespace lab5
 {
-	class EquilateralTriangleLawn: public Lawn
+	class EquilateralTriangleLawn: public Lawn, public IFenceable
 	{
 	public:
 		EquilateralTriangleLawn(unsigned int width);
