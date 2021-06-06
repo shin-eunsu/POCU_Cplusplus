@@ -41,7 +41,7 @@ namespace lab5
 			break;
 		}
 
-		totalPrice = round(grassCount * grassUnitPrice);
+		totalPrice = static_cast <unsigned int>(round(grassCount * grassUnitPrice));
 		
 		return totalPrice;
 	}

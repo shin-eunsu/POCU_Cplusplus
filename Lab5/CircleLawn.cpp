@@ -14,12 +14,12 @@ namespace lab5
 
 	unsigned int CircleLawn::GetArea() const
 	{
-		return round(PI * mRadius * mRadius);
+		return static_cast<unsigned int>(round(PI * mRadius * mRadius));
 	}
 
 	unsigned int CircleLawn::GetMinimumFencesCount() const
 	{
-		return 2 * PI * mRadius * 4;
+		return static_cast <unsigned int>(2 * PI * mRadius * 4);
 	}
 
 	unsigned int CircleLawn::GetFencePrice(eFenceType fenceType) const
@@ -36,6 +36,6 @@ namespace lab5
 			break;
 		}
 
-		return GetMinimumFencesCount() * fenceUnitPrice;
+		return static_cast <unsigned int>(GetMinimumFencesCount() * fenceUnitPrice);
 	}
 }

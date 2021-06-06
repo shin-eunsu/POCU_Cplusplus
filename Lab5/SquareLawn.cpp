@@ -41,7 +41,7 @@ namespace lab5
 			break;
 		}
 
-		return GetMinimumFencesCount() * fenceUnitPrice;
+		return static_cast <unsigned int>(GetMinimumFencesCount() * fenceUnitPrice);
 	}
 
 }
