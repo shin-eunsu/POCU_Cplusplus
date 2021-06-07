@@ -38,6 +38,11 @@ namespace lab6
 
 	float Average(const std::vector<int>& v)
 	{
+		if (v.empty())
+		{
+			return 0;
+		}
+
 		int cnt = 0;
 		int sum = 0;
 
@@ -56,53 +61,51 @@ namespace lab6
 		{
 			return 0;
 		}
-		else
-		{
-			std::vector<std::vector<int>> dt;
-			dt.push_back(std::vector<int>(2, 0));
 
-			bool newRow = true;
-			int cnt = 0;
-			int maxCnt = 0;
-			int maxKey = 0;
-			for (int num : v)
+		std::vector<std::vector<int>> dt;
+		dt.push_back(std::vector<int>(2, 0));
+
+		bool bNewRow = true;
+		int cnt = 0;
+		int maxCnt = 0;
+		int maxKey = 0;
+		for (int num : v)
+		{
+			int keyCnt = 0;
+			for (std::vector<int> key : dt)
 			{
-				int keyCnt = 0;
-				for (std::vector<int> key : dt)
-				{					
-					if (key[0] == num)
-					{
-						if (maxCnt < ++dt[keyCnt][1])
-						{
-							maxCnt = dt[keyCnt][1];
-							maxKey = key[0];
-							keyCnt++;
-							break;
-						}
-					}
-					newRow = true;
-				}
-				if (newRow)
+				if (key[0] == num)
 				{
-					if (cnt != 0)
+					if (maxCnt < ++dt[keyCnt][1])
 					{
-						dt.push_back(std::vector<int>(2, 0));
+						maxCnt = dt[keyCnt][1];
+						maxKey = key[0];
+						keyCnt++;
+						break;
 					}
-					newRow = false;
-					dt[cnt][0] = num;
-					dt[cnt][1] = 1;
-					cnt++;
 				}
+				bNewRow = true;
 			}
-			return maxKey;
+			if (bNewRow)
+			{
+				if (cnt != 0)
+				{
+					dt.push_back(std::vector<int>(2, 0));
+				}
+				bNewRow = false;
+				dt[cnt][0] = num;
+				dt[cnt][1] = 1;
+				cnt++;
+			}
 		}
+		return maxKey;
 	}
 
 	void SortDescending(std::vector<int>& v)
 	{
-		for (int i = 0; i < v.size(); i++)
+		for (size_t i = 0; i < v.size(); i++)
 		{
-			for (int j = 0; j < v.size() - 1; j++)
+			for (size_t j = 0; j < v.size() - 1; j++)
 			{
 				int min = std::min(v[j], v[j + 1]);
 				int max = std::max(v[j], v[j + 1]);
