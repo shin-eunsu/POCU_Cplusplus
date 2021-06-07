@@ -80,10 +80,11 @@ namespace lab6
 					{
 						maxCnt = dt[keyCnt][1];
 						maxKey = key[0];
-						keyCnt++;
+						bNewRow = false;
 						break;
-					}
+					}					
 				}
+				keyCnt++;
 				bNewRow = true;
 			}
 			if (bNewRow)

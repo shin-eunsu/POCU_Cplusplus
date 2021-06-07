@@ -6,7 +6,7 @@ int Test_F(void);
 
 int main()
 {
-	Test0();
+	//Test0();
 	Test_F();
 }
 
@@ -44,38 +44,50 @@ int Test0(void)
 int Test_F(void)
 {
 	std::vector<int> v0;
-	v0.push_back(4);
-	v0.push_back(14);
 	v0.push_back(1);
 	v0.push_back(2);
 	v0.push_back(3);
+	v0.push_back(1);
 	v0.push_back(2);
-	v0.push_back(7);
-	v0.push_back(4);
-	v0.push_back(6);
-	v0.push_back(4);
-	v0.push_back(4);
-	v0.push_back(4);
-	v0.push_back(9);
+	v0.push_back(3);
+	v0.push_back(1);
+	v0.push_back(2);
+	v0.push_back(2);
+	v0.push_back(3);
+
 	int numWithMaxOccurence = lab6::NumberWithMaxOccurrence(v0);
-	assert(numWithMaxOccurence == 4);
+	assert(numWithMaxOccurence == 2);
 
 	std::vector<int> v1;
-	v1.push_back(-4);
-	v1.push_back(-14);
-	v1.push_back(-1);
+	v1.push_back(-2);
 	v1.push_back(-2);
 	v1.push_back(-3);
 	v1.push_back(-2);
-	v1.push_back(-7);
 	v1.push_back(-4);
 	v1.push_back(-6);
 	v1.push_back(-4);
 	v1.push_back(-4);
 	v1.push_back(-4);
-	v1.push_back(-9);
 	int numWithMaxOccurence1 = lab6::NumberWithMaxOccurrence(v1);
 	assert(numWithMaxOccurence1 == -4);
+
+
+	std::vector<int> v2;
+	v2.push_back(-1);
+	v2.push_back(-14);
+	v2.push_back(-1);
+	v2.push_back(-2);
+	v2.push_back(3);
+	v2.push_back(-2);
+	v2.push_back(7);
+	v2.push_back(-4);
+	v2.push_back(-6);
+	v2.push_back(4);
+	v2.push_back(-4);
+	v2.push_back(-4);
+	v2.push_back(-9);
+	int numWithMaxOccurence2 = lab6::NumberWithMaxOccurrence(v2);
+	assert(numWithMaxOccurence2 == -4);
 
 
 	return 0;
