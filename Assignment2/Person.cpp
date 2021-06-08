@@ -5,21 +5,17 @@ namespace assignment2
 	Person::Person(const char* name, unsigned int weight)
 		: mWeight(weight)
 	{
-		int len = strlen(name) + 1;
-		strcpy_s(mName, len, name);
+		mName = name;
 	}
 
 	Person::Person(const Person& other)
 		: mWeight(other.mWeight)
 	{
-		int len = strlen(other.mName) + 1;
-		mName = new char[len];
-		strcpy_s(mName, len, other.mName);
+		mName = other.mName;
 	}
 
 	Person::~Person()
 	{
-		delete[] mName;
 	}
 
 	const std::string& Person::GetName() const

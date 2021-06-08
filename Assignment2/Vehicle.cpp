@@ -3,6 +3,7 @@
 namespace assignment2
 {
 	Vehicle::Vehicle(unsigned int maxPassengersCount)
+		: mMaxPassengersCount(maxPassengersCount)
 	{
 	}
 
@@ -12,6 +13,7 @@ namespace assignment2
 
 	bool Vehicle::AddPassenger(const Person* person)
 	{
+
 		return false;
 	}
 
