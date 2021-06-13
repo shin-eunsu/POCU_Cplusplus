@@ -22,8 +22,8 @@ namespace assignment2
 		if (mDeusCnt < MAXCOUNT)
 		{
 			//mVehicle[mDeusCnt++] = vehicle;
-			return true;
 		}
+		return true;
 	}
 
 	bool DeusExMachina::RemoveVehicle(unsigned int i)
