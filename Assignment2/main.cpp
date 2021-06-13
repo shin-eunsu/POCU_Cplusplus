@@ -1,4 +1,6 @@
 #include <cassert>
+#include <iostream>
+#include <string>
 
 #include "Vehicle.h"
 #include "Airplane.h"
@@ -11,9 +13,10 @@
 #include "DeusExMachina.h"
 #include "Person.h"
 
+#define STR(name) #name
 
 using namespace assignment2;
-
+using namespace std;
 
 void Test0();
 void Test1();
@@ -22,6 +25,8 @@ void Test2();
 int main()
 {
 	Test0();
+	Test1();
+	Test2();
 }
 
 void Test0()
@@ -43,25 +48,25 @@ void Test0()
 	a.AddPassenger(p2);
 	a.AddPassenger(p3);
 
-	//assert(a.GetMaxPassengersCount() == 5);
-	//assert(a.GetPassengersCount() == 3);
-	//assert(a.GetPassenger(1) == p2);
-	//assert(a.GetFlySpeed() == 648);
-	//assert(a.GetDriveSpeed() == 59);
-	//assert(a.GetMaxSpeed() == 648);
+	assert(a.GetMaxPassengersCount() == 5);
+	assert(a.GetPassengersCount() == 3);
+	assert(a.GetPassenger(1) == p2);
+	assert(a.GetFlySpeed() == 648);
+	assert(a.GetDriveSpeed() == 59);
+	assert(a.GetMaxSpeed() == 648);
+	
+	Boat b(5);
+	b.AddPassenger(p4);
+	b.AddPassenger(p5);
+	b.AddPassenger(p6);
 
-	//Boat b(5);
-	//b.AddPassenger(p4);
-	//b.AddPassenger(p5);
-	//b.AddPassenger(p6);
+	Boatplane bp = a + b;
 
-	//Boatplane bp = a + b;
+	assert(bp.GetPassengersCount() == 6);
+	assert(bp.GetMaxPassengersCount() == 10);
 
-	//assert(bp.GetPassengersCount() == 6);
-	//assert(bp.GetMaxPassengersCount() == 10);
-
-	//assert(a.GetPassengersCount() == 0);
-	//assert(b.GetPassengersCount() == 0);
+	assert(a.GetPassengersCount() == 0);
+	assert(b.GetPassengersCount() == 0);
 
 	//DeusExMachina* deusExMachina1 = DeusExMachina::GetInstance();
 	//DeusExMachina* deusExMachina2 = DeusExMachina::GetInstance();
@@ -69,19 +74,19 @@ void Test0()
 	//bool bSame = deusExMachina1 == deusExMachina2;
 	//assert(bSame);
 
-	//Airplane* airplane = new Airplane(5);
-	//Boat* boat = new Boat(5);
-	//Boatplane* boatplane = new Boatplane(5);
-	//Motorcycle* motorcycle = new Motorcycle();
-	//Sedan* sedan = new Sedan();
-	//Sedan* sedan2 = new Sedan();
-	//UBoat* uboat = new UBoat();
+	Airplane* airplane = new Airplane(5);
+	Boat* boat = new Boat(5);
+	Boatplane* boatplane = new Boatplane(5);
+	Motorcycle* motorcycle = new Motorcycle();
+	Sedan* sedan = new Sedan();
+	Sedan* sedan2 = new Sedan();
+	UBoat* uboat = new UBoat();
 
-	//bool bAdded = sedan2->AddTrailer(new Trailer(50));
-	//assert(bAdded);
+	bool bAdded = sedan2->AddTrailer(new Trailer(50));
+	assert(bAdded);
 
-	//bAdded = sedan2->AddTrailer(new Trailer(60));
-	//assert(!bAdded);
+	bAdded = sedan2->AddTrailer(new Trailer(60));
+	assert(!bAdded);
 
 	//bAdded = deusExMachina1->AddVehicle(airplane);
 	//assert(bAdded);
@@ -127,105 +132,105 @@ void Test0()
 
 void Test1()
 {
-	//const char* MAX_SPEED_LABLE = "Max Speed: ";
-	//const char* CUR_P_LABLE = "Current Person: ";
-	//const unsigned int MAX_CAPACITY = 10;
+	const char* MAX_SPEED_LABLE = "Max Speed: ";
+	const char* CUR_P_LABLE = "Current Person: ";
+	const unsigned int MAX_CAPACITY = 10;
 
-	//Vehicle* air = new Airplane(MAX_CAPACITY);
+	Vehicle* air = new Airplane(MAX_CAPACITY);
 
-	//Person* toAdd;
-	//const unsigned int personWeight = 10;
+	Person* toAdd;
+	const unsigned int personWeight = 10;
 
-	//for (size_t i = 0; i < MAX_CAPACITY + 10; i++)
-	//{
-	//	toAdd = new Person(STR(i), i);
-	//	if (air->AddPassenger(toAdd) == false)
-	//	{
-	//		delete toAdd;
-	//	}
+	for (size_t i = 0; i < MAX_CAPACITY + 10; i++)
+	{
+		toAdd = new Person(STR(i), i);
+		if (air->AddPassenger(toAdd) == false)
+		{
+			delete toAdd;
+		}
 
-	//	cout << MAX_SPEED_LABLE << air->GetMaxSpeed() << endl
-	//		<< CUR_P_LABLE << air->GetPassengersCount() << endl;
-	//}
+		cout << MAX_SPEED_LABLE << air->GetMaxSpeed() << endl
+			<< CUR_P_LABLE << air->GetPassengersCount() << endl;
+	}
 
-	//while (air->RemovePassenger(0))
-	//{
-	//	cout << CUR_P_LABLE << air->GetPassengersCount() << endl;;
-	//}
+	while (air->RemovePassenger(0))
+	{
+		cout << CUR_P_LABLE << air->GetPassengersCount() << endl;;
+	}
 
-	//Person* overlapTest = new Person("Overlap Test", 100);
-	//air->AddPassenger(overlapTest);
-	//air->AddPassenger(overlapTest);
+	Person* overlapTest = new Person("Overlap Test", 100);
+	air->AddPassenger(overlapTest);
+	air->AddPassenger(overlapTest);
 	//assert(air->GetPassengersCount() == 1); // 빌드봇은 이런 테스트 안함
 
-	//toAdd = NULL;
+	toAdd = NULL;
 	//assert(air->AddPassenger(toAdd) == false); // 빌드봇은 이런 테스트 안함
 
-	//delete air;
+	delete air;
 
-	//Airplane dockingTest1(10);
-	//Boat dockingTest2(10);
+	Airplane dockingTest1(10);
+	Boat dockingTest2(10);
 
-	//for (size_t i = 0; i < 5; i++)
-	//{
-	//	dockingTest1.AddPassenger(new Person(STR(i), i));
-	//	dockingTest2.AddPassenger(new Person(STR(i), i));
-	//}
+	for (size_t i = 0; i < 5; i++)
+	{
+		dockingTest1.AddPassenger(new Person(STR(i), i));
+		dockingTest2.AddPassenger(new Person(STR(i), i));
+	}
 
-	//const Person* comp1 = dockingTest1.GetPassenger(0);
+	const Person* comp1 = dockingTest1.GetPassenger(0);
 
-	//Boatplane bp1 = dockingTest1 + dockingTest2;
-	//Boatplane bp2 = dockingTest2 + dockingTest1;
+	Boatplane bp1 = dockingTest1 + dockingTest2;
+	Boatplane bp2 = dockingTest2 + dockingTest1;
 
-	//const Person* comp2 = bp1.GetPassenger(0);
+	const Person* comp2 = bp1.GetPassenger(0);
 
 	//assert(comp1 == comp2); // 빌드봇은 이런 테스트 안함
-	//assert(dockingTest1.GetPassengersCount() == 0);
-	//assert(dockingTest2.GetPassengersCount() == 0);
-	//assert(bp1.GetPassengersCount() == 10);
-	//assert(bp2.GetPassengersCount() == 0);
+	assert(dockingTest1.GetPassengersCount() == 0);
+	assert(dockingTest2.GetPassengersCount() == 0);
+	assert(bp1.GetPassengersCount() == 10);
+	assert(bp2.GetPassengersCount() == 0);
 
-	//Boatplane copyConstuctorTest(bp1);
+	Boatplane copyConstuctorTest(bp1);
 
 	//for (size_t i = 0; i < bp1.GetPassengersCount(); i++)
 	//{
 	//	const Person* p1 = bp1.GetPassenger(i);
 	//	const Person* p2 = copyConstuctorTest.GetPassenger(i);
-	//	assert(p1 != p2);
+ //		assert(p1 != p2);
 	//}
-	//assert(bp1.GetMaxPassengersCount() == copyConstuctorTest.GetMaxPassengersCount());
-	//assert(bp1.GetPassengersCount() == copyConstuctorTest.GetPassengersCount());
-	//assert(bp1.GetMaxSpeed() == copyConstuctorTest.GetMaxSpeed());
+	assert(bp1.GetMaxPassengersCount() == copyConstuctorTest.GetMaxPassengersCount());
+	assert(bp1.GetPassengersCount() == copyConstuctorTest.GetPassengersCount());
+	assert(bp1.GetMaxSpeed() == copyConstuctorTest.GetMaxSpeed());
 
-	//Sedan sedanTest;
-	//Trailer* t1 = new Trailer(10);
-	//Trailer* t2 = new Trailer(20);
+	Sedan sedanTest;
+	Trailer* t1 = new Trailer(10);
+	Trailer* t2 = new Trailer(20);
 
-	//assert(sedanTest.AddTrailer(t1));
-	//assert(!sedanTest.AddTrailer(t1));
-	//assert(!sedanTest.AddTrailer(t2));
-	//assert(sedanTest.RemoveTrailer());
-	//assert(sedanTest.AddTrailer(t2));
-	//assert(sedanTest.RemoveTrailer());
+	assert(sedanTest.AddTrailer(t1));
+	assert(!sedanTest.AddTrailer(t1));
+	assert(!sedanTest.AddTrailer(t2));
+	assert(sedanTest.RemoveTrailer());
+	assert(sedanTest.AddTrailer(t2));
+	assert(sedanTest.RemoveTrailer());
 
-	//DeusExMachina* d = DeusExMachina::GetInstance();
-	//Vehicle* demAirplain = new Airplane(MAX_CAPACITY);
-	//Vehicle* demBoat = new Airplane(MAX_CAPACITY);
-	//Vehicle* demBoatplain = new Boatplane(MAX_CAPACITY);
-	//Vehicle* demMotorcycle = new Motorcycle();
-	//Vehicle* demSedan1 = new Sedan();
-	//Vehicle* demSedan2 = new Sedan();
-	//Trailer* demTrailer = new Trailer(10);
-	//static_cast<Sedan*>(demSedan2)->AddTrailer(demTrailer);
-	//Vehicle* demUBoat = new UBoat();
+	DeusExMachina* d = DeusExMachina::GetInstance();
+	Vehicle* demAirplain = new Airplane(MAX_CAPACITY);
+	Vehicle* demBoat = new Airplane(MAX_CAPACITY);
+	Vehicle* demBoatplain = new Boatplane(MAX_CAPACITY);
+	Vehicle* demMotorcycle = new Motorcycle();
+	Vehicle* demSedan1 = new Sedan();
+	Vehicle* demSedan2 = new Sedan();
+	Trailer* demTrailer = new Trailer(10);
+	static_cast<Sedan*>(demSedan2)->AddTrailer(demTrailer);
+	Vehicle* demUBoat = new UBoat();
 
-	//d->AddVehicle(demAirplain);
-	//d->AddVehicle(demBoat);
-	//d->AddVehicle(demBoatplain);
-	//d->AddVehicle(demMotorcycle);
-	//d->AddVehicle(demSedan1);
-	//d->AddVehicle(demSedan2);
-	//d->AddVehicle(demUBoat);
+	d->AddVehicle(demAirplain);
+	d->AddVehicle(demBoat);
+	d->AddVehicle(demBoatplain);
+	d->AddVehicle(demMotorcycle);
+	d->AddVehicle(demSedan1);
+	d->AddVehicle(demSedan2);
+	d->AddVehicle(demUBoat);
 
 	//for (size_t i = 0; i < 7; i++)
 	//{
@@ -241,7 +246,7 @@ void Test1()
 	//	d->Travel();
 	//}
 
-	//delete d;
+	delete d;
 }
 
 void Test2()

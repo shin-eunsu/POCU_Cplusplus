@@ -18,6 +18,13 @@ namespace assignment2
 	{
 	}
 
+	Person Person::operator=(const Person& rhs)
+	{
+		mName = rhs.mName;
+		mWeight = rhs.mWeight;
+		return *this;
+	}
+
 	const std::string& Person::GetName() const
 	{
 		return mName;

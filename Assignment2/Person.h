@@ -10,7 +10,8 @@ namespace assignment2
 		Person(const char* name, unsigned int weight);
 		Person(const Person& other);
 		~Person();
-
+		
+		Person operator=(const Person& rhs);
 		const std::string& GetName() const;
 		unsigned int GetWeight() const;
 

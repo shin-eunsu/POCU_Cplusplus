@@ -19,7 +19,8 @@ namespace assignment2
 		unsigned int GetMaxPassengersCount() const;
 
 	private:
+		unsigned int mCnt;
 		unsigned int mMaxPassengersCount;
-		Person* mPerson[100] {nullptr};
+		const Person* mPerson[100] {nullptr};
 	};
 }
