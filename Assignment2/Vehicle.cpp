@@ -17,6 +17,20 @@ namespace assignment2
 		}
 	}
 
+	Vehicle::Vehicle(const Vehicle& other)
+		: mMaxPassengersCount(other.mMaxPassengersCount)
+		, mCnt(other.mCnt)
+	{
+	}
+
+	Vehicle& Vehicle::operator=(const Vehicle& rhs)
+	{
+		mCnt = rhs.mCnt;
+		mMaxPassengersCount = rhs.mMaxPassengersCount;
+
+		return *this;
+	}
+
 	bool Vehicle::AddPassenger(const Person* person)
 	{
 		if (person == nullptr)
@@ -48,8 +62,7 @@ namespace assignment2
 		{
 			if (i != mCnt - 1)
 			{
-
-				for (int cnt = i; cnt < mCnt - 1; cnt++)
+				for (unsigned int cnt = i; cnt < mCnt - 1; cnt++)
 				{
 					mPerson[cnt] = mPerson[cnt + 1];
 				}

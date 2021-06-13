@@ -4,7 +4,8 @@ namespace assignment2
 {
 	DeusExMachina* DeusExMachina::GetInstance()
 	{
-		return NULL;
+		static DeusExMachina* deusExMachina = new DeusExMachina();
+		return deusExMachina;
 	}
 
 	void DeusExMachina::Travel() const
@@ -13,7 +14,13 @@ namespace assignment2
 
 	bool DeusExMachina::AddVehicle(Vehicle* vehicle)
 	{
-		return false;
+		if (deusCnt > 10)
+		{
+			return false;
+		}
+
+
+		return true;
 	}
 
 	bool DeusExMachina::RemoveVehicle(unsigned int i)

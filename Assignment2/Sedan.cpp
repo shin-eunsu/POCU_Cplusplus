@@ -43,26 +43,30 @@ namespace assignment2
 		}
 		sumWeight += mTrailer->GetWeight();
 
+		unsigned int speed = 0;
+
 		if (sumWeight <= 80)
 		{
-			return 480;
+			speed = 480;
 		}
 		else if (sumWeight > 80)
 		{
-			return 458;
+			speed = 458;
 		}
 		else if (sumWeight > 160)
 		{
-			return 400;
+			speed = 400;
 		}
 		else if (sumWeight > 260)
 		{
-			return 380;
+			speed = 380;
 		}
 		else if (sumWeight > 350)
 		{
-			return 300;
+			speed = 300;
 		}
+
+		return speed;
 	}
 
 	unsigned int Sedan::GetMaxSpeed() const
