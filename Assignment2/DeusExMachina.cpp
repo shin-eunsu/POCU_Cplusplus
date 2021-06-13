@@ -14,17 +14,33 @@ namespace assignment2
 
 	bool DeusExMachina::AddVehicle(Vehicle* vehicle)
 	{
-		if (deusCnt > 10)
+		if (mDeusCnt > 10 || vehicle == nullptr)
 		{
 			return false;
 		}
 
-
-		return true;
+		if (mDeusCnt < MAXCOUNT)
+		{
+			mVehicle[mDeusCnt++] = vehicle;
+			return true;
+		}
 	}
 
 	bool DeusExMachina::RemoveVehicle(unsigned int i)
 	{
+		if (i < mDeusCnt)
+		{
+			if (i != mDeusCnt - 1)
+			{
+				for (unsigned int cnt = i; cnt < mDeusCnt - 1; cnt++)
+				{
+					mVehicle[cnt] = mVehicle[cnt + 1];
+				}
+			}
+			mVehicle[--mDeusCnt] = nullptr;
+			return true;
+		}
+
 		return false;
 	}
 

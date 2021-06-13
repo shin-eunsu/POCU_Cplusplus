@@ -21,6 +21,11 @@ namespace assignment2
 		: mMaxPassengersCount(other.mMaxPassengersCount)
 		, mCnt(other.mCnt)
 	{
+		for (unsigned int i = 0; i < mCnt; i++)
+		{
+			const char* name = other.mPerson[i]->GetName().c_str();
+			mPerson[i] = new Person(name, other.mPerson[i]->GetWeight());
+		}
 	}
 
 	Vehicle& Vehicle::operator=(const Vehicle& rhs)
@@ -28,6 +33,11 @@ namespace assignment2
 		mCnt = rhs.mCnt;
 		mMaxPassengersCount = rhs.mMaxPassengersCount;
 
+		for (unsigned int i = 0; i < mCnt; i++)
+		{
+			const char* name = rhs.mPerson[i]->GetName().c_str();
+			mPerson[i] = new Person(name, rhs.mPerson[i]->GetWeight());
+		}
 		return *this;
 	}
 

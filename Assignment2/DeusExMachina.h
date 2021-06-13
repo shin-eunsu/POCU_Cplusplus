@@ -22,6 +22,6 @@ namespace assignment2
 
 		const unsigned int MAXCOUNT = 10;
 		Vehicle* mVehicle[10] {nullptr};
-		unsigned int deusCnt = 0;
+		unsigned int mDeusCnt = 0;
 	};
 }

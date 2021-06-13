@@ -4,6 +4,7 @@ namespace assignment2
 {
 	Boatplane::Boatplane(unsigned int maxPassengersCount)
 		: Vehicle(maxPassengersCount)
+		, mBoatplaneMaxCnt(maxPassengersCount)
 	{
 	}
 
