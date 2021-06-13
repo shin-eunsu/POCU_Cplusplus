@@ -21,7 +21,7 @@ namespace assignment2
 
 		if (mDeusCnt < MAXCOUNT)
 		{
-			mVehicle[mDeusCnt++] = vehicle;
+			//mVehicle[mDeusCnt++] = vehicle;
 			return true;
 		}
 	}
