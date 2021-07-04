@@ -64,7 +64,19 @@ namespace lab7
 
 		for (typename std::vector<T>::const_iterator iter = v1.begin(); iter != v1.end(); ++iter)
 		{
-			combined.push_back(*iter);
+			bool bIsPush = true;
+			for (typename std::vector<T>::const_iterator iter2 = combined.begin(); iter2 != combined.end(); ++iter2)
+			{
+				if (*iter == *iter2)
+				{
+					bIsPush = false;
+					break;
+				}
+			}
+			if (bIsPush)
+			{
+				combined.push_back(*iter);
+			}
 		}
 
 		for (typename std::vector<T>::const_iterator iter2 = v2.begin(); iter2 != v2.end(); ++iter2)
