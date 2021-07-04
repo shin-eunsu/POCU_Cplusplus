@@ -4,15 +4,13 @@
 #include <vector>
 #include <map>
 
-using namespace std;
-
 namespace lab7
 {
 	template <typename K, class V>
 	std::map<K, V> ConvertVectorsToMap(const std::vector<K>& keys, const std::vector<V>& values)
 	{
 		std::map<K, V> m;
-		int mapSize = min(keys.size(), values.size());
+		int mapSize = std::min(keys.size(), values.size());
 
 		for (int i = 0; i < mapSize; i++)
 		{
@@ -27,7 +25,7 @@ namespace lab7
 	{
 		std::vector<K> v;
 
-		for (typename map<K, V>::const_iterator iter = m.begin(); iter != m.end(); ++iter)
+		for (typename std::map<K, V>::const_iterator iter = m.begin(); iter != m.end(); ++iter)
 		{
 			v.push_back(iter->first);
 		}
@@ -39,7 +37,7 @@ namespace lab7
 	{
 		std::vector<V> v;
 
-		for (typename map<K, V>::const_iterator iter = m.begin(); iter != m.end(); ++iter)
+		for (typename std::map<K, V>::const_iterator iter = m.begin(); iter != m.end(); ++iter)
 		{
 			v.push_back(iter->second);
 		}
@@ -51,7 +49,7 @@ namespace lab7
 	{
 		std::vector<T> rv;
 
-		for (typename vector<T>::const_reverse_iterator iter = v.rbegin(); iter != v.rend(); ++iter)
+		for (typename std::vector<T>::const_reverse_iterator iter = v.rbegin(); iter != v.rend(); ++iter)
 		{
 			rv.push_back(*iter);
 		}
@@ -64,15 +62,15 @@ namespace lab7
 	{
 		std::vector<T> combined;
 
-		for (typename vector<T>::const_iterator iter = v1.begin(); iter != v1.end(); ++iter)
+		for (typename std::vector<T>::const_iterator iter = v1.begin(); iter != v1.end(); ++iter)
 		{
 			combined.push_back(*iter);
 		}
 
-		for (typename vector<T>::const_iterator iter2 = v2.begin(); iter2 != v2.end(); ++iter2)
+		for (typename std::vector<T>::const_iterator iter2 = v2.begin(); iter2 != v2.end(); ++iter2)
 		{
 			bool bIsPush = true;
-			for (typename vector<T>::iterator iterc = combined.begin(); iterc != combined.end(); ++iterc)
+			for (typename std::vector<T>::iterator iterc = combined.begin(); iterc != combined.end(); ++iterc)
 			{
 				if (*iter2 == *iterc)
 				{
@@ -94,15 +92,15 @@ namespace lab7
 	{
 		std::map<K, V> combined;
 
-		for (typename map<K, V>::const_iterator iter = m1.begin(); iter != m1.end(); ++iter)
+		for (typename std::map<K, V>::const_iterator iter = m1.begin(); iter != m1.end(); ++iter)
 		{
-			combined.insert(pair(iter->first, iter->second));
+			combined.insert(std::pair(iter->first, iter->second));
 		}
 
-		for (typename map<K, V>::const_iterator iter2 = m2.begin(); iter2 != m2.end(); ++iter2)
+		for (typename std::map<K, V>::const_iterator iter2 = m2.begin(); iter2 != m2.end(); ++iter2)
 		{
 			bool bIsInsert = true;
-			for (typename map<K, V>::const_iterator iter = m1.begin(); iter != m1.end(); ++iter)
+			for (typename std::map<K, V>::const_iterator iter = m1.begin(); iter != m1.end(); ++iter)
 			{
 				if (*iter == *iter2)
 				{
@@ -110,7 +108,7 @@ namespace lab7
 					break;
 				}
 			}
-			combined.insert(pair(iter2->first, iter2->second));
+			combined.insert(std::pair(iter2->first, iter2->second));
 		}
 
 		return combined;
@@ -119,7 +117,7 @@ namespace lab7
 	template<typename T>
 	std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
 	{
-		for (typename vector<T>::const_iterator iter = v.begin(); iter != v.end(); ++iter)
+		for (typename std::vector<T>::const_iterator iter = v.begin(); iter != v.end(); ++iter)
 		{
 			os << *iter;
 			if (iter != v.end() - 1)
@@ -133,12 +131,12 @@ namespace lab7
 	template <typename K, class V>
 	std::ostream& operator<<(std::ostream& os, const std::map<K, V>& m)
 	{
-		for (typename map<K, V>::const_iterator iter = m.begin(); iter != m.end(); ++iter)
+		for (typename std::map<K, V>::const_iterator iter = m.begin(); iter != m.end(); ++iter)
 		{
 			os << "{ " << iter->first << ", " << iter->second << " }";
 			if (iter != --m.end())
 			{
-				os << endl;
+				os << std::endl;
 			}
 		}
 		return os;
