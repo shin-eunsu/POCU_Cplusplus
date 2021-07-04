@@ -145,11 +145,7 @@ namespace lab7
 	{
 		for (typename std::map<K, V>::const_iterator iter = m.begin(); iter != m.end(); ++iter)
 		{
-			os << "{ " << iter->first << ", " << iter->second << " }";
-			if (iter != --m.end())
-			{
-				os << std::endl;
-			}
+			os << "{ " << iter->first << ", " << iter->second << " }" << std::endl;
 		}
 		return os;
 	}

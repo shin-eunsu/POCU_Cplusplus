@@ -1,6 +1,13 @@
 #include <cassert>
+#include <crtdbg.h>
 
 #include "Lab7.h"
+
+#if _DEBUG
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define malloc(s) _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#endif
+
 
 using namespace lab7;
 
@@ -9,7 +16,13 @@ int TestCase2();
 
 int main()
 {
+	TestCase1();
+
 	TestCase2();
+
+	_CrtDumpMemoryLeaks();
+
+	return 0;
 }
 
 int TestCase1()
