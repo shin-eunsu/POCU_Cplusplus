@@ -120,7 +120,7 @@ namespace lab7
 		for (typename std::vector<T>::const_iterator iter = v.begin(); iter != v.end(); ++iter)
 		{
 			os << *iter;
-			if (iter != v.end() - 1)
+			if (iter != --v.end())
 			{
 				os << ", ";
 			}
