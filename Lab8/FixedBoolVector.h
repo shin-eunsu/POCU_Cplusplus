@@ -16,27 +16,28 @@ namespace lab8
 
 		}
 
-		bool Add(bool data)
+		bool Add(bool bData)
 		{
 			if (mSize >= N)
 			{
 				return false;
 			}
 
-			mArray[mSize++] = data;
+			mArray[mSize++] = bData;
 			return true;
 		}
 
-		bool Remove(bool data)
+		bool Remove(bool bData)
 		{
 			for (size_t i = 0; i < mSize; i++)
 			{
-				if (mArray[i] == data)
+				if (mArray[i] == bData)
 				{
 					for (size_t j = i; j < mSize - 1; j++)
 					{
 						mArray[j] = mArray[j + 1];
 					}
+					mArray[mSize - 1] = NULL;
 					mSize--;
 					return true;
 				}
@@ -44,7 +45,7 @@ namespace lab8
 			return false;
 		}
 
-		bool Get(unsigned int index)
+		bool Get(unsigned int index) const
 		{
 			return mArray[index];
 		}
@@ -54,11 +55,12 @@ namespace lab8
 			return mArray[index];
 		}
 
-		int GetIndex(bool data)
+
+		int GetIndex(bool bData)
 		{
 			for (size_t i = 0; i < mSize; i++)
 			{
-				if (mArray[i] == data)
+				if (mArray[i] == bData)
 				{
 					return i;
 				}
@@ -66,19 +68,19 @@ namespace lab8
 			return -1;
 		}
 
-		size_t GetSize()
+		size_t GetSize() const
 		{
 			return mSize;
 		}
 
-		size_t GetCapacity()
+		size_t GetCapacity() const
 		{
 			return N;
 		}
 
 	private:
 		size_t mSize;
-		uint32_t mArray[N];
+		bool mArray[N];
 	};
 
 }
