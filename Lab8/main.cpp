@@ -16,7 +16,10 @@ int main()
 	Test1();
 	testFixedBoolVector();
 	testFixedVector();
+
+	system("pause");
 }
+
 
 int Test0()
 {

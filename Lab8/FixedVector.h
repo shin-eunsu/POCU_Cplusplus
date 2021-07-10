@@ -12,20 +12,21 @@ namespace lab8
 		T& Get(unsigned int index);
 		T& operator[](unsigned int index);
 		T& operator=(const T& data);
+		T& operator=(int data);
 		int GetIndex(const T& data);
 		size_t GetSize() const;
 		size_t GetCapacity() const;
 
 	private:
 		size_t mSize;
-		T mArray[N] {0};
+		T mArray[N];
 	};
 
 	template<typename T, size_t N>
 	FixedVector<T, N>::FixedVector()
 		: mSize(0)
+		, mArray{{}}
 	{
-
 	}
 
 	template<typename T, size_t N>
@@ -74,6 +75,14 @@ namespace lab8
 	template<typename T, size_t N>
 	T& FixedVector<T, N>::operator=(const T& data)
 	{
+		mArray[mSize] = data;
+		return data;
+	}
+
+	template<typename T, size_t N>
+	T& FixedVector<T, N>::operator=(int data)
+	{
+		mArray[mSize] = data;
 		return data;
 	}
 
