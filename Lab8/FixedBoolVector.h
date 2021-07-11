@@ -9,78 +9,146 @@ namespace lab8
 	class FixedVector<bool, N>
 	{
 	public:
-		FixedVector()
-			: mSize(0)
-			, mbArray{{}}
+		FixedVector();
+		FixedVector(const FixedVector<bool, N>& other);
+		bool Add(const bool& bData);
+		bool Remove(const bool& bData);
+		const bool Get(unsigned int index) const;
+		bool operator[](unsigned int index);
+		int GetIndex(bool bData) const;
+		size_t GetSize() const;
+		size_t GetCapacity() const;
+
+	private:
+		enum { MAX = 32 };
+		size_t mSize;
+		uint32_t mArray[((N - 1) / MAX) + 1];
+	};
+
+
+	template<size_t N>
+	FixedVector<bool, N>::FixedVector()
+		: mSize(0)
+	{
+		memset(mArray, 0, sizeof(mArray));
+	}
+
+	template<size_t N>
+	FixedVector<bool, N>::FixedVector(const FixedVector<bool, N>& bOther)
+		: mSize(bOther.mSize)
+		, mArray(bOther.mArray)
+	{
+		memset(mArray, 0, sizeof(mArray));
+	}
+
+	template<size_t N>
+	bool FixedVector<bool, N>::Add(const bool& bData)
+	{
+		if (mSize >= N)
 		{
-
-		}
-
-		bool Add(bool bData)
-		{
-			if (mSize >= N)
-			{
-				return false;
-			}
-
-			mbArray[mSize++] = bData;
-			return true;
-		}
-
-		bool Remove(bool bData)
-		{
-			for (size_t i = 0; i < mSize; i++)
-			{
-				if (mbArray[i] == bData)
-				{
-					for (size_t j = i; j < mSize - 1; j++)
-					{
-						mbArray[j] = mbArray[j + 1];
-					}
-					mbArray[mSize - 1] = 0;
-					mSize--;
-					return true;
-				}
-			}
 			return false;
 		}
 
-		bool Get(unsigned int index) const
+		unsigned int index = mSize / MAX;
+		unsigned int bitIndex = mSize % MAX;
+
+		if (bData)
 		{
-			return mbArray[index];
+			mArray[index] |= (1 << bitIndex);
 		}
-
-		bool operator[](unsigned int index)
+		else
 		{
-			return mbArray[index];
+			mArray[index] &= ~(1 << bitIndex);
 		}
+		mSize++;
+		return true;
+	}
 
+	template<size_t N>
+	bool FixedVector<bool, N>::Remove(const bool& bData)
+	{
+		const unsigned int maxIndex = ((mSize - 1) / MAX) + 1;
 
-		int GetIndex(bool bData) const
+		//for (size_t i = 0; i < maxIndex; i++)
+		//{
+		//	for (size_t j = 0; j < mSize && j < MAX; j++)
+		//	{
+		//		if ((mArray[i] & (1 << j)) > 0)
+		//		{
+		//			if (bData)
+		//			{
+		//				mArray[i] >> (j + 1);
+		//			}
+		//		}
+		//		else
+		//		{
+		//			if (!bData)
+		//			{
+
+		//			}
+		//		}
+		//	}
+		//}
+
+		return false;
+	}
+
+	template<size_t N>
+	const bool FixedVector<bool, N>::Get(unsigned int index) const
+	{
+		unsigned int intIndex = index / MAX;
+		unsigned int bitIndex = index % MAX;
+
+		return mArray[intIndex] & (1 << bitIndex);
+	}
+
+	template<size_t N>
+	bool FixedVector<bool, N>::operator[](unsigned int index)
+	{
+		unsigned int intIndex = index / MAX;
+		unsigned int bitIndex = index % MAX;
+
+		return mArray[intIndex] & (1 << bitIndex);
+	}
+
+	template<size_t N>
+	int FixedVector<bool, N>::GetIndex(bool bData) const
+	{
+		const unsigned int maxIndex = ((mSize - 1) / MAX) + 1;
+
+		for (size_t i = 0; i < maxIndex; i++)
 		{
-			for (size_t i = 0; i < mSize; i++)
+			for (size_t j = 0; j < MAX && j < mSize; j++)
 			{
-				if (mbArray[i] == bData)
+				if ((mArray[i] & (1 << j)) > 0)
 				{
-					return i;
+					if (bData)
+					{
+						return (i * MAX) + j;
+					}
+				}
+				else
+				{
+					if (!bData)
+					{
+						return (i * MAX) + j;
+					}
 				}
 			}
-			return -1;
 		}
 
-		size_t GetSize() const
-		{
-			return mSize;
-		}
+		return -1;
+	}
 
-		size_t GetCapacity() const
-		{
-			return N;
-		}
+	template<size_t N>
+	size_t FixedVector<bool, N>::GetSize() const
+	{
+		return mSize;
+	}
 
-	private:
-		size_t mSize;
-		bool mbArray[N];
-	};
-
+	template<size_t N>
+	size_t FixedVector<bool, N>::GetCapacity() const
+	{
+		return N;
+	}
 }

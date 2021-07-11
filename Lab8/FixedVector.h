@@ -1,5 +1,5 @@
 #pragma once
-
+#include <cstring>
 namespace lab8
 {
 	template<typename T, size_t N>
@@ -7,12 +7,12 @@ namespace lab8
 	{
 	public:
 		FixedVector();
+		FixedVector(const FixedVector<T, N>& other);
 		bool Add(const T& data);
 		bool Remove(const T& data);
-		T Get(unsigned int index) const;
+		const T& Get(unsigned int index) const;
 		T& operator[](unsigned int index);
-		FixedVector<T, N>& operator=(const T& data);
-		//T& operator=(int data);
+		FixedVector<T, N>& operator=(const FixedVector<T, N>& other);
 		int GetIndex(const T& data) const;
 		size_t GetSize() const;
 		size_t GetCapacity() const;
@@ -25,8 +25,15 @@ namespace lab8
 	template<typename T, size_t N>
 	FixedVector<T, N>::FixedVector()
 		: mSize(0)
-		, mArray{{}}
 	{
+		memset(mArray, 0, sizeof(T) * N);
+	}
+
+	template<typename T, size_t N>
+	FixedVector<T, N>::FixedVector(const FixedVector<T, N>& other)
+		: mSize(other.mSize)
+	{
+		memcpy(mArray, other.mArray, sizeof(T) * N);
 	}
 
 	template<typename T, size_t N>
@@ -61,7 +68,7 @@ namespace lab8
 	}
 
 	template<typename T, size_t N>
-	T FixedVector<T, N>::Get(unsigned int index) const
+	const T& FixedVector<T, N>::Get(unsigned int index) const
 	{
 		return mArray[index];
 	}
@@ -73,18 +80,12 @@ namespace lab8
 	}
 
 	template<typename T, size_t N>
-	FixedVector<T, N>& FixedVector<T, N>::operator=(const T& data)
+	FixedVector<T, N>& FixedVector<T, N>::operator=(const FixedVector<T, N>& other)
 	{
-		mArray[mSize] = data;
+		mSize = other.mSize;
+		memcpy(mArray, other.mArray, sizeof(T) * N);
 		return *this;
 	}
-
-	//template<typename T, size_t N>
-	//T& FixedVector<T, N>::operator=(int data)
-	//{
-	//	mArray[mSize] = data;
-	//	return data;
-	//}
 
 	template<typename T, size_t N>
 	int FixedVector<T, N>::GetIndex(const T& data) const
