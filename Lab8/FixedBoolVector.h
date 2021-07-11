@@ -11,7 +11,7 @@ namespace lab8
 	public:
 		FixedVector()
 			: mSize(0)
-			, mArray{{}}
+			, bArray{{}}
 		{
 
 		}
@@ -23,7 +23,7 @@ namespace lab8
 				return false;
 			}
 
-			mArray[mSize++] = bData;
+			bArray[mSize++] = bData;
 			return true;
 		}
 
@@ -31,11 +31,11 @@ namespace lab8
 		{
 			for (size_t i = 0; i < mSize; i++)
 			{
-				if (mArray[i] == bData)
+				if (bArray[i] == bData)
 				{
 					for (size_t j = i; j < mSize - 1; j++)
 					{
-						mArray[j] = mArray[j + 1];
+						bArray[j] = bArray[j + 1];
 					}
 					//mArray[mSize - 1] = 0;
 					mSize--;
@@ -47,20 +47,20 @@ namespace lab8
 
 		bool Get(unsigned int index) const
 		{
-			return mArray[index];
+			return bArray[index];
 		}
 
 		bool operator[](unsigned int index)
 		{
-			return mArray[index];
+			return bArray[index];
 		}
 
 
-		int GetIndex(bool bData)
+		int GetIndex(bool bData) const
 		{
 			for (size_t i = 0; i < mSize; i++)
 			{
-				if (mArray[i] == bData)
+				if (bArray[i] == bData)
 				{
 					return i;
 				}
@@ -80,7 +80,7 @@ namespace lab8
 
 	private:
 		size_t mSize;
-		uint32_t mArray[N];
+		bool bArray[N];
 	};
 
 }
