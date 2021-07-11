@@ -11,7 +11,7 @@ namespace lab8
 		bool Remove(const T& data);
 		T Get(unsigned int index) const;
 		T& operator[](unsigned int index);
-		T& operator=(const T& data);
+		FixedVector<T, N>& operator=(const T& data);
 		//T& operator=(int data);
 		int GetIndex(const T& data) const;
 		size_t GetSize() const;
@@ -52,7 +52,7 @@ namespace lab8
 				{
 					mArray[j] = mArray[j + 1];
 				}
-				//mArray[mSize - 1] = 0;
+				mArray[mSize - 1] = 0;
 				mSize--;
 				return true;
 			}
@@ -73,10 +73,10 @@ namespace lab8
 	}
 
 	template<typename T, size_t N>
-	T& FixedVector<T, N>::operator=(const T& data)
+	FixedVector<T, N>& FixedVector<T, N>::operator=(const T& data)
 	{
 		mArray[mSize] = data;
-		return data;
+		return *this;
 	}
 
 	//template<typename T, size_t N>
