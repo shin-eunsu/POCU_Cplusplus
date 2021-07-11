@@ -60,7 +60,7 @@ namespace lab8
 					mArray[j] = mArray[j + 1];
 				}
 				mSize--;
-				mArray[mSize] = NULL;
+				//mArray[mSize] = NULL;
 				return true;
 			}
 		}

@@ -69,26 +69,26 @@ namespace lab8
 	{
 		const unsigned int maxIndex = ((mSize - 1) / MAX) + 1;
 
-		for (size_t i = 0; i < maxIndex; i++)
-		{
-			for (size_t j = 0; j < mSize && j < MAX; j++)
-			{
-				if ((mArray[i] & (1 << j)) > 0)
-				{
-					if (bData)
-					{
-						mArray[i] >> (j + 1);
-					}
-				}
-				else
-				{
-					if (!bData)
-					{
+		//for (size_t i = 0; i < maxIndex; i++)
+		//{
+		//	for (size_t j = 0; j < mSize && j < MAX; j++)
+		//	{
+		//		if ((mArray[i] & (1 << j)) > 0)
+		//		{
+		//			if (bData)
+		//			{
+		//				mArray[i] >> (j + 1);
+		//			}
+		//		}
+		//		else
+		//		{
+		//			if (!bData)
+		//			{
 
-					}
-				}
-			}
-		}
+		//			}
+		//		}
+		//	}
+		//}
 
 		return false;
 	}
