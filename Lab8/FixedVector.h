@@ -59,8 +59,8 @@ namespace lab8
 				{
 					mArray[j] = mArray[j + 1];
 				}
-				mArray[mSize - 1] = 0;
 				mSize--;
+				mArray[mSize] = NULL;
 				return true;
 			}
 		}
