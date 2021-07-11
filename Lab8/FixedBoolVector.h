@@ -80,7 +80,7 @@ namespace lab8
 
 	private:
 		size_t mSize;
-		bool bArray[N];
+		bool mbArray[N];
 	};
 
 }
